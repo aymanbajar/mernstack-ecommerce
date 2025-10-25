@@ -13,14 +13,14 @@ export const register  =async ({firstName,lastName,email,password}: RegisterPara
     //check  if user have an account
     const  findUser =  await userModel.findOne({email});
     if(findUser){
-        return  { error :{ message : "User already exists"}}
+        return  { data : "User already exists",statusCode : 400 }
     }
     // create new user
     const newUser = new userModel({firstName,lastName,email,password});
     // save user to database
     await newUser.save();
     // return new user
-    return newUser
+    return { data : newUser,statusCode : 200};
 }   
 
 //interface login params
@@ -34,13 +34,13 @@ export const  login = async ({email,password}:LoginParams) => {
     const findUser = await userModel.findOne({email});
     // check if user exists
     if(!findUser){
-        return {error : {message : "Incorrect email  or password"}}
+        return {data : "Incorrect email  or password",statusCode : 400}
     }
     // check if password is correct
 
     if(findUser.password !== password){
-        return {error : {message : "Incorrect email  or password"}}
+        return {data : "Incorrect email  or password",statusCode : 400}
     }
     // return user
-    return findUser;
+    return {data : findUser,statusCode : 200};
 }
