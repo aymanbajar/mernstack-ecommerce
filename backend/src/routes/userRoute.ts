@@ -1,10 +1,10 @@
 import express from "express";
-import { register } from "../services/userService.ts";
+import { login, register } from "../services/userService.ts";
 
 // Create a router instance
 const router = express.Router();
 
-// user register route
+// user register route endpoint
 router.post("/register", async (req, res) => {
   // get user details from request body
   const { firstName, lastName, email, password } = req.body;
@@ -16,6 +16,17 @@ router.post("/register", async (req, res) => {
     email,
     password,
   });
+  // send response
+  return res.status(statusCode).send(data);
+});
+
+//user login route endpoint
+
+router.post("/login", async (req, res) => {
+  // get user details from request body
+  const { email, password } = req.body;
+  // call login service
+  const { data, statusCode } = await login({ email, password });
   // send response
   return res.status(statusCode).send(data);
 });

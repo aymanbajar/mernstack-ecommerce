@@ -1,5 +1,5 @@
 import { userModel } from "../models/userModel.ts";
-
+import bcrypt from "bcrypt";
 // register parameters interface
 interface RegisterParams{
     firstName:string;
@@ -15,8 +15,10 @@ export const register  =async ({firstName,lastName,email,password}: RegisterPara
     if(findUser){
         return  { data : "User already exists",statusCode : 400 }
     }
+    //bcrypt  password
+    const bcryptedPassword =  await bcrypt.hash(password,10);
     // create new user
-    const newUser = new userModel({firstName,lastName,email,password});
+    const newUser = new userModel({firstName,lastName,email,password:bcryptedPassword});
     // save user to database
     await newUser.save();
     // return new user
@@ -36,9 +38,13 @@ export const  login = async ({email,password}:LoginParams) => {
     if(!findUser){
         return {data : "Incorrect email  or password",statusCode : 400}
     }
+
+
+    // compare  password
+    const isPasswordCorrect  = await bcrypt.compare(password,findUser.password);
     // check if password is correct
 
-    if(findUser.password !== password){
+    if(!isPasswordCorrect){
         return {data : "Incorrect email  or password",statusCode : 400}
     }
     // return user
