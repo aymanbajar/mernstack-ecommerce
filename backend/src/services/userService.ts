@@ -1,5 +1,6 @@
 import { userModel } from "../models/userModel.ts";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 // register parameters interface
 interface RegisterParams{
     firstName:string;
@@ -22,7 +23,7 @@ export const register  =async ({firstName,lastName,email,password}: RegisterPara
     // save user to database
     await newUser.save();
     // return new user
-    return { data : newUser,statusCode : 200};
+    return { data : generateJWT({firstName,lastName,email   }),statusCode : 200};
 }   
 
 //interface login params
@@ -48,5 +49,12 @@ export const  login = async ({email,password}:LoginParams) => {
         return {data : "Incorrect email  or password",statusCode : 400}
     }
     // return user
-    return {data : findUser,statusCode : 200};
+    return {data : generateJWT({firstName:findUser.firstName, lastName:findUser.lastName, email}),statusCode : 200};
+}
+
+
+// generate jwt token 
+const generateJWT = (data :any) => {
+    // sign jwt token for bcrypt data 
+    return jwt.sign(data ,"dlHoD8lbswBDBSTjeVtkPQNwWSHvjiqD")
 }
