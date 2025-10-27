@@ -22,7 +22,7 @@ interface GetActiveCartForUser {
 }
 
 //define function for get active cart for user
-const getActiveCartForUser = async({ userId }: GetActiveCartForUser) =>{
+export const getActiveCartForUser = async({ userId }: GetActiveCartForUser) =>{
     // find active cart for user
     let cart = await cartModel.findOne({ userId, status: "active" });
 
