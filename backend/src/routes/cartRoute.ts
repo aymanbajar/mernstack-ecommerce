@@ -2,7 +2,7 @@ import express from 'express';
 import {getActiveCartForUser} from '../services/cartService.ts';
 import { validateJWT } from '../middlewares/validateJWT.ts';
 import {type ExtendRequest} from '../types/ExtendRequest.ts';
-
+import { addItemToCart } from '../services/cartService.ts';
 // create  router for cart
 const router = express.Router();
 
@@ -15,7 +15,17 @@ router.get('/',validateJWT, async (req: ExtendRequest ,res) => {
     res.status(200).send(cart);
 })
 
+//Add items to cart endpoint
 
+router.post('/items',validateJWT,async (req:ExtendRequest,res)=>{
+  const userId =  req.user?._id;
+ const {productId ,quantity} = req.body;
+
+ //add items to cart
+ const {statusCode,data} = await addItemToCart({userId,productId,quantity});
+ res.status(statusCode).send({data});
+
+})
 
 
 
