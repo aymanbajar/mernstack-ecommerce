@@ -66,6 +66,7 @@ export const addItemToCart =  async({userId,productId,quantity}:AddItemToCart) =
     cart.totalAmount += product.price * quantity;
     // save cart to database
     await cart.save();
+    // return success message
     return {data:"Item added to cart",statusCode:200};
 
 }
