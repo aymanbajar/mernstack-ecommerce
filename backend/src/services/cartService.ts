@@ -96,9 +96,7 @@ export const updateItemInCart = async({userId,productId,quantity}:UpdateItemInCa
     return {data:"low stock for the product",statusCode:400};
    }
    const otherCartItems  =cart.items.filter((p) => p.product.toString() !== productId);
-   let total  = otherCartItems.reduce((sum,product) => {
-    return sum + (product.unitPrice * product.quantity);
-   }, 0);
+   let total  = calculateTotalAmount({cartItems:otherCartItems});
     // update item quantity in cart
     existsInCart.quantity = quantity;
     // update total amount
@@ -110,3 +108,46 @@ export const updateItemInCart = async({userId,productId,quantity}:UpdateItemInCa
     // return success message
     return {data:updatedCart,statusCode:200};
 }
+
+// define interface for remove item from cart
+interface DeleteItemInCart{
+  userId:string;
+  productId:any;
+}
+
+// define function for remove item from cart
+export const deleteItemInCart =  async({userId,productId}:DeleteItemInCart) =>{
+  //get adctive cart for user
+  const cart = await getActiveCartForUser({userId});
+  //find item in cart
+  const existsInCart =  cart.items.find((p) => p.product.toString() === productId);
+  //check if item exists in cart
+  if(!existsInCart){
+    return {data:'product does not exists in cart ',statusCode:404};
+  }
+  // filter out the item to be removed
+  const otherCartItems  = cart.items.filter((p) => p.product.toString() !== productId);
+  // calculate new total amount
+  let  total = calculateTotalAmount({cartItems:otherCartItems});
+  // assign filtered items to cart
+  cart.items = otherCartItems;
+  // update total amount
+  cart.totalAmount = total;
+  // save cart to database
+  const updatedCart = await cart.save();
+  // return success message
+  return {data:updatedCart,statusCode:200};
+}
+
+// calculate total amount of cart
+
+const calculateTotalAmount = ({cartItems}:{cartItems: ICartItem[]}) => {
+  const total = cartItems.reduce((sum, item) => {
+    return sum + item.unitPrice * item.quantity;
+  }, 0);
+  return total;
+}
+
+
+
+
