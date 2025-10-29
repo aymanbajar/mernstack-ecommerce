@@ -149,5 +149,23 @@ const calculateTotalAmount = ({cartItems}:{cartItems: ICartItem[]}) => {
 }
 
 
+//define interface for clear cart
+interface ClearCart{
+  userId:string;
+}
+//define function for clear cart
+export const clearCart = async({userId}:ClearCart) =>{
+  //get active cart for user
+  const cart = await getActiveCartForUser({userId});
+  //clear cart items
+  cart.items = [];
+  //set total amount to zero
+  cart.totalAmount = 0;
+  //save cart to database
+  const updatedCart = await cart.save();
+  //return success message
+  return {data:updatedCart,statusCode:200};
+}
+
 
 
