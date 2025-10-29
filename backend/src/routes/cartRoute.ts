@@ -3,6 +3,7 @@ import {getActiveCartForUser} from '../services/cartService.ts';
 import { validateJWT } from '../middlewares/validateJWT.ts';
 import {type ExtendRequest} from '../types/ExtendRequest.ts';
 import { addItemToCart } from '../services/cartService.ts';
+import { updateItemInCart } from '../services/cartService.ts';  
 // create  router for cart
 const router = express.Router();
 
@@ -25,6 +26,17 @@ router.post('/items',validateJWT,async (req:ExtendRequest,res)=>{
  const {statusCode,data} = await addItemToCart({userId,productId,quantity});
  //send response
  res.status(statusCode).send({data});
+
+})
+
+// update item in cart endpoint
+router.put('/items',validateJWT,async (req:ExtendRequest,res)=>{
+  //get user id from jwt
+  const userId =  req.user?._id;
+  // get product id and quantity from body
+  const {productId ,quantity} = req.body;
+  const {data ,statusCode} = await updateItemInCart({userId,productId,quantity});
+  res.status(statusCode).send({data});
 
 })
 
