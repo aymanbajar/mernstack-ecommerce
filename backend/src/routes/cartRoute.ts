@@ -5,6 +5,7 @@ import {type ExtendRequest} from '../types/ExtendRequest.ts';
 import { addItemToCart } from '../services/cartService.ts';
 import { updateItemInCart } from '../services/cartService.ts';  
 import { deleteItemInCart } from '../services/cartService.ts';
+import { clearCart } from '../services/cartService.ts';
 
 // create  router for cart
 const router = express.Router();
@@ -49,6 +50,14 @@ router.delete('/items/:productId',validateJWT,async (req:ExtendRequest,res)=>{
   // get product id from params
   const {productId} = req.params;
   const {data ,statusCode} = await deleteItemInCart({userId,productId});
+  res.status(statusCode).send({data});
+})
+
+//define endpoint for clear cart
+router.delete('/',validateJWT,async (req:ExtendRequest,res)=>{
+  //get user id from jwt
+  const userId =  req.user?._id;
+  const {data ,statusCode} = await clearCart({userId});
   res.status(statusCode).send({data});
 })
 
