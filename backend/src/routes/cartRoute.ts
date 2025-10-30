@@ -6,6 +6,7 @@ import { addItemToCart } from '../services/cartService.ts';
 import { updateItemInCart } from '../services/cartService.ts';  
 import { deleteItemInCart } from '../services/cartService.ts';
 import { clearCart } from '../services/cartService.ts';
+import {checkout} from '../services/cartService.ts';
 
 // create  router for cart
 const router = express.Router();
@@ -61,6 +62,17 @@ router.delete('/',validateJWT,async (req:ExtendRequest,res)=>{
   res.status(statusCode).send({data});
 })
 
+//define endpoint for checkout cart
+router.post('/checkout',validateJWT, async (req:ExtendRequest,res)=>{
+    //get user id from jwt
+    const userId = req.user?._id;
+    //get addres from body
+    const {address} = req.body;
+    //call checkout
+    const {data ,statusCode} = await checkout({userId,address});
+    //send response
+    res.status(statusCode).send({data});
 
 
+});
 export default router;
