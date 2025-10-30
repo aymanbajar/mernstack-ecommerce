@@ -1,6 +1,8 @@
 import { cartModel } from "../models/cartModel.ts";
 import { type ICartItem } from "../models/cartModel.ts";
+import type { IOrderItems } from "../models/orderModel.ts";
 import { productModel } from "../models/productModel.ts";
+import { orderModel } from "../models/orderModel.ts";
 // define interface for create  cart for user
 
 interface CreateCartForUser {
@@ -166,6 +168,58 @@ export const clearCart = async({userId}:ClearCart) =>{
   //return success message
   return {data:updatedCart,statusCode:200};
 }
+
+//define interfacr for checkut params
+interface checkOutParams {
+  userId:string;
+  address:string;
+}
+
+export const checkout   = async({userId,address}:checkOutParams) => {
+  //check if address is provided
+  if(!address){
+    return {data:"Address is required for checkout",statusCode:400};
+  }
+  //get active cart for user
+  const cart = await getActiveCartForUser({userId});
+ //define order items array
+ const orderItems:IOrderItems[] = [];
+
+ //items in cart 
+ for(const item of cart.items){
+  //get product 
+  const product =  await productModel.findById(item.product);
+  if(!product){
+    return {data :"Product not found",statusCode:404};
+   }
+   const orderItem:IOrderItems ={
+    productTitle:product.title,
+    productImage:product.image,
+    unitPrice:item.unitPrice,
+    quantity:item.quantity
+   }
+   //push order item to order items array
+   orderItems.push(orderItem);
+   }
+   //assign items properties to order model
+   const order = await orderModel.create({
+    userId,
+    address,
+    orderItems,
+    total:cart.totalAmount
+   });
+   //save order to database
+    await order.save();
+    //update cart status to completed
+    cart.status = "completed";
+    //save cart to database
+    await cart.save();
+    //return success message
+    return {data:order,statusCode:200};
+
+ }
+
+
 
 
 
