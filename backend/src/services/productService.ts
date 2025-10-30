@@ -10,7 +10,8 @@ import { productModel } from "../models/productModel.ts";
 // insert products 
 export const seedInitailProducts = async () => {
     // product  list 
-      const products = [
+ try{
+       const products = [
   {
     "title": "Macbook Pro",
     "image": "https://5.imimg.com/data5/SELLER/Default/2021/11/JO/DF/OI/74357280/apple-macbook-pro-500x500.jpg",
@@ -78,4 +79,7 @@ export const seedInitailProducts = async () => {
     if(existingProducts.length === 0){
         await productModel.insertMany(products);
     }
+ }catch(err){
+   console.error("cannor see database", err);
+ }
 }
