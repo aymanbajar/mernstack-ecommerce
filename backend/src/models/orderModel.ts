@@ -33,4 +33,4 @@ const orderSchema  =  new Schema<IOrder>({
 })    ;
 
 //create order model
-export const OrderModel = mongoose.model<IOrder>('Order', orderSchema);
+export const orderModel = mongoose.model<IOrder>('Order', orderSchema);
