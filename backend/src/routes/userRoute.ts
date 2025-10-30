@@ -6,7 +6,8 @@ const router = express.Router();
 
 // user register route endpoint
 router.post("/register", async (req, res) => {
-  // get user details from request body
+ try{
+    // get user details from request body
   const { firstName, lastName, email, password } = req.body;
 
   // call register service
@@ -18,17 +19,24 @@ router.post("/register", async (req, res) => {
   });
   // send response
   return res.status(statusCode).send(data);
+ }catch(err){
+  res.status(500).send("something went wrong!");
+ }
 });
 
 //user login route endpoint
 
 router.post("/login", async (req, res) => {
-  // get user details from request body
+  try{
+    // get user details from request body
   const { email, password } = req.body;
   // call login service
   const { data, statusCode } = await login({ email, password });
   // send response
   return res.status(statusCode).send(data);
+  }catch(err){
+    res.status(500).send("something went wrong!");
+  }
 });
 
 export default router;
