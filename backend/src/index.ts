@@ -1,17 +1,18 @@
+import dotenv from "dotenv";
 import express from "express";
 import mongoose from "mongoose";
 import userRoute from "./routes/userRoute.ts";
 import productRoute from "./routes/productRoute.ts";
 import cartRoute from "./routes/cartRoute.ts";
 import { seedInitailProducts } from "./services/productService.ts";
-
+dotenv.config(); // load environment variables from .env file
 const app = express(); // initialize express app
 const PORT = 3000; // define port number
 app.use(express.json()); // middleware to parse json request body
-
+console.log("DATABASE_URL:", process.env.DATABASE_URL);
 //connect to mongodb
 mongoose
-  .connect("mongodb+srv://aymanbajar:asd12341234@cluster0.maovooo.mongodb.net/")
+  .connect(process.env.DATABASE_URL || "")
   .then(() => console.log("MongoDB connected!"))
   .catch((error) => console.log("failed to connect to MongoDB", error));
 
