@@ -9,7 +9,7 @@ dotenv.config(); // load environment variables from .env file
 const app = express(); // initialize express app
 const PORT = 3000; // define port number
 app.use(express.json()); // middleware to parse json request body
-console.log("DATABASE_URL:", process.env.DATABASE_URL);
+
 //connect to mongodb
 mongoose
   .connect(process.env.DATABASE_URL || "")

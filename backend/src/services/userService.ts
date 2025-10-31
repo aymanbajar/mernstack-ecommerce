@@ -56,5 +56,5 @@ export const  login = async ({email,password}:LoginParams) => {
 // generate jwt token 
 const generateJWT = (data :any) => {
     // sign jwt token for bcrypt data 
-    return jwt.sign(data ,"dlHoD8lbswBDBSTjeVtkPQNwWSHvjiqD")
+    return jwt.sign(data , process.env.JWT_SECRET || "")
 }

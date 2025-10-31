@@ -4,6 +4,7 @@ import {type  ExtendRequest } from "../types/ExtendRequest.ts";
 import { userModel } from "../models/userModel.ts";
 
 
+
 export const validateJWT = (req: ExtendRequest, res: Response, next: NextFunction) => {
     //get  authorization form req
     const authorization =  req.get('authorization');
@@ -19,7 +20,7 @@ export const validateJWT = (req: ExtendRequest, res: Response, next: NextFunctio
         return;
     }
     //verify token
-    jwt.verify(token,'dlHoD8lbswBDBSTjeVtkPQNwWSHvjiqD', async(err :any ,payload :any) =>{
+    jwt.verify(token,process.env.JWT_SECRET || "", async(err :any ,payload :any) =>{
         if(err){
             res.status(403).send('Invalid token');
             return;
