@@ -6,6 +6,7 @@ function App() {
 
   return (
     <>
+
     {/* browser router */}
       <BrowserRouter>
         {/* routes */}
