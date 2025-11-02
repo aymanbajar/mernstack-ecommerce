@@ -5,5 +5,6 @@
     "My Orders": "Siparişlerim",
     "Shopping Cart": "Alışveriş Sepeti",
     "Logout": "Çıkış Yap",
-    "Add to cart": "Sepete ekle"
+    "Add to cart": "Sepete ekle",
+    "Failed to fetch products.": "Ürünler alınamadı."
 }

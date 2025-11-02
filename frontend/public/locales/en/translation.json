@@ -5,5 +5,6 @@
     "My Orders": "My Orders",
     "Shopping Cart": "Shopping Cart",
     "Logout": "Logout",
-    "Add to cart": "Add to cart"
+    "Add to cart": "Add to cart",
+    "Failed to fetch products.": "Failed to fetch products."
 }

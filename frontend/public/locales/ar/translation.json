@@ -5,5 +5,6 @@
     "My Orders": "طلباتي",
     "Shopping Cart": "عربة التسوق",
     "Logout": "تسجيل الخروج",
-    "Add to cart": "أضف إلى العربة"
+    "Add to cart": "أضف إلى العربة",
+    "Failed to fetch products.": "فشل في جلب المنتجات."
 }
