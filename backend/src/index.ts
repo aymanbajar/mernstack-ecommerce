@@ -5,8 +5,10 @@ import userRoute from "./routes/userRoute.ts";
 import productRoute from "./routes/productRoute.ts";
 import cartRoute from "./routes/cartRoute.ts";
 import { seedInitailProducts } from "./services/productService.ts";
+import cors from "cors";
 dotenv.config(); // load environment variables from .env file
 const app = express(); // initialize express app
+app.use(cors()); // enable CORS
 const PORT = 3000; // define port number
 app.use(express.json()); // middleware to parse json request body
 
