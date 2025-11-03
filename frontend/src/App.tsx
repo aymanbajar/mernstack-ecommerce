@@ -3,7 +3,7 @@ import './App.css'
 import Navbar from './components/Navbar';
 import HomePage from './pages/HomePage';
 import Footer from './components/Footer';
-
+import RegisterPage from './pages/RegisterPage';
 function App() {
 
 
@@ -19,6 +19,8 @@ function App() {
         <Routes>
           {/* Route paths */}
           <Route path='/' element={ <HomePage /> } />
+        
+
         
  
         </Routes>
