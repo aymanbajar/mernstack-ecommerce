@@ -30,6 +30,10 @@
     "Privacy Policy": "Privacy Policy",
     "Join us today and start shopping!": "Join us today and start shopping!",
     "By registering, you agree to our": "By registering, you agree to our",
-    "and": "and"
+    "and": "and",
+    "All fields are required.": "All fields are required.",
+    "Passwords do not match": "Passwords do not match",
+    "Registration failed. Please try again.": "Registration failed. Please try again.",
+    "Registration error:": "Registration error:"
 
 }
