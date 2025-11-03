@@ -17,8 +17,9 @@ router.post("/register", async (req, res) => {
     email,
     password,
   });
+  console.log({"First Name : ": firstName, "Last Name :": lastName, "Email : ": email, "Password :": password});
   // send response
-  return res.status(statusCode).send(data);
+  return res.status(statusCode).json(data);
  }catch(err){
   res.status(500).send("something went wrong!");
  }
@@ -33,7 +34,7 @@ router.post("/login", async (req, res) => {
   // call login service
   const { data, statusCode } = await login({ email, password });
   // send response
-  return res.status(statusCode).send(data);
+  return res.status(statusCode).json(data);
   }catch(err){
     res.status(500).send("something went wrong!");
   }
