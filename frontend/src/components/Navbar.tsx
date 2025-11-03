@@ -1,6 +1,6 @@
 // hooks
 import { useNavigate } from "react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 // Icons
@@ -18,12 +18,22 @@ export default function Navbar() {
   const { t, i18n } = useTranslation();
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedLang(e.target.value);
-    i18n.changeLanguage(e.target.value);
+    const lang= e.target.value;
+    setSelectedLang(lang);
+    i18n.changeLanguage(lang);
+    localStorage.setItem("i18nextLng", lang);
   };
+
+
   function handleDisplayMenu() {
     setDisplayMenu((prev) => !prev);
   }
+
+  useEffect(() => {
+    const storedLang = localStorage.getItem("i18nextLng") || "en";
+    setSelectedLang(storedLang);
+    i18n.changeLanguage(storedLang);
+  }, [i18n]);
 
 
   return (
@@ -44,21 +54,21 @@ export default function Navbar() {
           {/* Right Side Menu */}
           <div className="flex items-center gap-6">
             {/* Language Selector */}
-            <select
-              value={selectedLang}
-              onChange={handleChange}
-              className="bg-white/20 backdrop-blur-sm text-white text-sm font-medium px-4 py-2 rounded-lg border border-white/30 hover:bg-white/30 focus:outline-none focus:ring-2 focus:ring-white/50 transition-all duration-300 cursor-pointer"
-            >
-              <option value="en" className="bg-blue-600 text-white">
-                 {t('English')}
-              </option>
-              <option value="ar" className="bg-blue-600 text-white">
-               {t('Arabic')}
-              </option>
-              <option value="tr" className="bg-blue-600 text-white">
-                {t('Turkish')}
-              </option>
-            </select>
+                <select
+      value={selectedLang}
+      onChange={handleChange}
+      className="bg-white/20 backdrop-blur-sm text-sm font-medium px-4 py-2 rounded-lg border border-white/30 focus:outline-none focus:ring-2 focus:ring-white transition-all duration-300 cursor-pointer"
+    >
+      <option value="en" className="text-black">
+        {t("English")}
+      </option>
+      <option value="ar" className="text-black">
+        {t("Arabic")}
+      </option>
+      <option value="tr" className="text-black">
+        {t("Turkish")}
+      </option>
+    </select>
 
             {/* Account Menu */}
             <div className="relative">
