@@ -2,7 +2,8 @@ import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 import { FaUser, FaEnvelope, FaLock, FaUserPlus, FaShoppingCart } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-
+import axios from 'axios';
+import { BASE_URL } from '../constants/BASE_URL';
 export default function RegisterPage() {
     const { t } = useTranslation();
     const navigate = useNavigate();
@@ -13,7 +14,7 @@ export default function RegisterPage() {
         password: '',
         confirmPassword: ''
     });
-
+    const [error,setError] = useState('');
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({
             ...formData,
@@ -21,11 +22,53 @@ export default function RegisterPage() {
         });
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // Add your registration logic here
-        console.log('Form submitted:', formData);
+        await onSubmit();
     };
+    
+    const onSubmit = async () => {
+        // Client side validation
+        if(!formData.name || !formData.lastname || !formData.email || !formData.password || !formData.confirmPassword){
+            setError(t('All fields are required'));
+            return;
+        }
+        
+        // Check if passwords match
+        if(formData.password !== formData.confirmPassword){
+            setError(t('Passwords do not match'));
+            return;
+        }
+
+        try {
+            const response = await axios.post(`${BASE_URL}/user/register`, {
+                firstName: formData.name,
+                lastName: formData.lastname,
+                email: formData.email,
+                password: formData.password,
+            }, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            // Success
+            if(response.status === 200 || response.status === 201){
+                setError('');
+                // Navigate to login or home page
+                navigate('/login');
+            }
+        } catch (error) {
+            // Handle error
+            if(axios.isAxiosError(error) && error.response?.data?.message){
+                setError(error.response.data.message);
+            } else {
+                setError(t('Registration failed. Please try again.'));
+            }
+            console.error('Registration error:', error);
+        }
+    }
+
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -178,6 +221,7 @@ export default function RegisterPage() {
                         <button
                             type="submit"
                             className="w-full flex items-center justify-center gap-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-blue-300"
+                            onClick={() => onSubmit()}
                         >
                             <FaUserPlus className="text-xl" />
                             <span>{t('Create Account')}</span>
@@ -203,6 +247,7 @@ export default function RegisterPage() {
                     >
                         {t('Sign In')}
                     </button>
+                    {error && <p className="text-red-500 text-sm text-center mt-2">{error}</p>}
                 </div>
 
                 {/* Footer Text */}
