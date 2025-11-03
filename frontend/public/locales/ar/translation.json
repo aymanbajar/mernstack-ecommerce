@@ -28,9 +28,13 @@
     "Sign In": "تسجيل الدخول",
     "Terms of Service": "شروط الخدمة",
     "Privacy Policy": "سياسة الخصوصية",
-    "Join us today and start shopping!": "انضم إلينا اليوم وابدأ التسوق!",
+    "Join us today and start shopping!": "! انضم إلينا اليوم وابدأ التسوق",
     "By registering, you agree to our": "بالتسجيل، فإنك توافق على",
-    "and": "و"
+    "and": "و",
+    "All fields are required.": "جميع الحقول مطلوبة.",
+    "Passwords do not match": "كلمات المرور غير متطابقة",
+    "Registration failed. Please try again.": ". التسجيل. حاول مرة أخرى",
+    "Registration error:": ": خطأ في التسجيل "    
 
 
 }
