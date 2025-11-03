@@ -11,5 +11,25 @@
     "All rights reserved": "Tüm hakları saklıdır",
     "We Accept": "Kabul Ediyoruz",
     "Get In Touch": "İletişime Geçin",
-    "Follow us:": "Bizi takip edin:"
+    "Follow us:": "Bizi takip edin:",
+    "Register New Account": "Yeni Hesap Kaydı",
+    "Already have an account?": "Zaten bir hesabınız var mı?",
+    "First Name": "İsim",
+    "Enter your first name": "Adınızı girin",
+    "Last Name": "Soyisim",
+    "Enter your last name": "Soyadınızı girin",
+    "Email": "Email",
+    "Enter your email": "Email adresinizi girin",
+    "Password": "Şifre",
+    "Enter your password": "Şifrenizi girin",
+    "Confirm Password": "Şifreyi Onayla",
+    "Confirm your password": "Şifrenizi onaylayın",
+    "Create Account": "Hesap Oluştur",
+    "Sign In": "Giriş Yap",
+    "Terms of Service": "Hizmet Şartları",
+    "Privacy Policy": "Gizlilik Politikası",
+    "Join us today and start shopping!": "Bugün bize katılın ve alışverişe başlayın!",
+    "By registering, you agree to our": "Kaydolarak, bizimle aynı fikirde olduğunuzu kabul edersiniz",
+    "and": "ve"
+
 }
