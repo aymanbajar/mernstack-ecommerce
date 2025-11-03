@@ -19,7 +19,7 @@ function App() {
         <Routes>
           {/* Route paths */}
           <Route path='/' element={ <HomePage /> } />
-        
+          <Route path='/register' element={ <RegisterPage /> } />
 
         
  
