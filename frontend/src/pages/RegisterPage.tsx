@@ -10,6 +10,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { BASE_URL } from "../constants/BASE_URL";
+import { useAuth } from "../contexts/Auth/AuthContext";
 export default function RegisterPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -21,6 +22,7 @@ export default function RegisterPage() {
     confirmPassword: "",
   });
   const [error, setError] = useState("");
+  const { login } = useAuth();
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
@@ -72,7 +74,7 @@ export default function RegisterPage() {
       if (response.status === 200 || response.status === 201) {
         setError("");
         // Navigate to login or home page
-        navigate("/login");
+        navigate("/");
         setFormData({
           name: "",
           lastname: "",
@@ -81,6 +83,9 @@ export default function RegisterPage() {
           confirmPassword: "",
         });
       }
+      const token  = response.data;
+      login(formData.email, token);
+
     } catch (error) {
       // Handle error
       if (axios.isAxiosError(error) && error.response?.data?.message) {
