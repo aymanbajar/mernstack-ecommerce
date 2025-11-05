@@ -40,7 +40,14 @@
     "Password:": "Şifre:",
     "Login": "Giriş Yap",
     "Don't have an account?": "Hesabınız yok mu?",
-    "Register here": "Buradan kaydolun"
+    "Register here": "Buradan kaydolun",
+      "Welcome Back!": "Tekrar Hoşgeldiniz!",
+    "Login to your account to continue shopping": "Login to your account to continue shopping",
+    "Email Address": "Email Address",
+    "Remember me": "Remember me",
+    "Forgot password?": "Forgot password?",
+    "Create one now": "Create one now"
+
 
 
 }
