@@ -46,7 +46,21 @@
     "Email Address": "Email Address",
     "Remember me": "Remember me",
     "Forgot password?": "Forgot password?",
-    "Create one now": "Create one now"
+    "Create one now": "Create one now",
+    "Account Settings": "Account Settings",
+    "Manage your account settings and preferences": "Manage your account settings and preferences",
+    "Profile Information": "Profile Information",
+    "Verified": "Verified",
+    "Enter first name": "Enter first name",
+    "Enter last name": "Enter last name",
+    "Change Password": "Change Password",
+    "Leave blank to keep current password": "Leave blank to keep current password",
+    "New Password": "New Password",
+    "Enter new password": "Enter new password",
+    "Confirm new password": "Confirm new password",
+    "Save Changes": "Save Changes",
+    "Cancel": "Cancel",
+    "Enter email address": "Enter email address"
 
 
 
