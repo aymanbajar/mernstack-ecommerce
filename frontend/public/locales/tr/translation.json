@@ -34,6 +34,13 @@
     "All fields are required.": "Tüm alanlar gereklidir.",
     "Passwords do not match": "Kelimeler eşleşmiyor",
     "Registration failed. Please try again.": "Kayıt işlemi başarısız oldu. Lütfen tekrar deneyin.",
-    "Registration error:": "Kayıt hatası:"
+    "Registration error:": "Kayıt hatası:",
+    "Login to your account": "Hesabınıza giriş yapın",
+    "Email:": "Email:",
+    "Password:": "Şifre:",
+    "Login": "Giriş Yap",
+    "Don't have an account?": "Hesabınız yok mu?",
+    "Register here": "Buradan kaydolun"
+
 
 }
