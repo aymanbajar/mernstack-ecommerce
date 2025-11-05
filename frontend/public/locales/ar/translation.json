@@ -36,11 +36,17 @@
     "Registration failed. Please try again.": ". التسجيل. حاول مرة أخرى",
     "Registration error:": ": خطأ في التسجيل ",
     "Login to your account": "تسجيل الدخول إلى حسابك",
-    "Email:": ": البريد الإلكتروني",
     "Password:": ": كلمة المرور",
     "Login": "تسجيل الدخول",
     "Don't have an account?": "ليس لديك حساب؟",
-    "Register here": "سجل هنا"
+    "Register here": "سجل هنا",
+    "Welcome Back!": "! مرحبًا بعودتك",
+    "Login to your account to continue shopping": ". لتستمر في التسوق، قم بتسجيل الدخول إلى حسابك",
+    "Email Address": "عنوان البريد الإلكتروني",
+    "Password": "كلمة المرور",
+    "Remember me": "تذكرني",
+    "Forgot password?": "هل نسيت كلمة المرور؟",
+    "Create one now": "أنشئ واحدًا الآن"
 
 
 
