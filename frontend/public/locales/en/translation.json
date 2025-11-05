@@ -34,6 +34,13 @@
     "All fields are required.": "All fields are required.",
     "Passwords do not match": "Passwords do not match",
     "Registration failed. Please try again.": "Registration failed. Please try again.",
-    "Registration error:": "Registration error:"
+    "Registration error:": "Registration error:",
+    "Login to your account": "Login to your account",
+    "Email:": "Email:",
+    "Password:": "Password:",
+    "Login": "Login",
+    "Don't have an account?": "Don't have an account?",
+    "Register here": "Register here"
+
 
 }
