@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
 import Footer from "./components/Footer";
 import RegisterPage from "./pages/RegisterPage";
+import LoginPage from "./pages/LoginPage";
 import { AuthProvider } from "./contexts/Auth/AuthProvider";
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           {/* Route paths */}
           <Route path="/" element={<HomePage />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/login" element={<LoginPage />} />
         </Routes>
         {/* footer */}
         <Footer />
