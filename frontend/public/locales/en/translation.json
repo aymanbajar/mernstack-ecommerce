@@ -40,7 +40,14 @@
     "Password:": "Password:",
     "Login": "Login",
     "Don't have an account?": "Don't have an account?",
-    "Register here": "Register here"
+    "Register here": "Register here",
+    "Welcome Back!": "Welcome Back!",
+    "Login to your account to continue shopping": "Login to your account to continue shopping",
+    "Email Address": "Email Address",
+    "Remember me": "Remember me",
+    "Forgot password?": "Forgot password?",
+    "Create one now": "Create one now"
+
 
 
 }
