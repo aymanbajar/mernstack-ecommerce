@@ -45,5 +45,22 @@
     "Email Address": "عنوان البريد الإلكتروني",
     "Remember me": "تذكرني",
     "Forgot password?": "هل نسيت كلمة المرور؟",
-    "Create one now": "أنشئ واحدًا الآن"
+    "Create one now": "أنشئ واحدًا الآن",
+    "Account Settings": "إعدادات الحساب",
+    "Manage your account settings and preferences": "إدارة إعدادات وتفضيلات حسابك",
+    "Profile Information": "معلومات الملف الشخصي",
+    "Verified": "تم التحقق",
+    "Enter first name": "أدخل الاسم الأول",
+    "Enter last name": "أدخل اسم العائلة",
+    "Change Password": "تغيير كلمة المرور",
+    "Leave blank to keep current password": "اتركه فارغًا للحفاظ على كلمة المرور الحالية",
+    "New Password": "كلمة المرور الجديدة",
+    "Enter new password": "أدخل كلمة المرور الجديدة",
+    "Confirm new password": "تأكيد كلمة المرور الجديدة",
+    "Save Changes": "حفظ التغييرات",
+    "Cancel": "إلغاء",
+    "Enter email address": "أدخل عنوان البريد الإلكتروني"
+
+    
+
 }
