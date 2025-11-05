@@ -46,7 +46,21 @@
     "Email Address": "Email Adresi",
     "Remember me": "Beni Hatırla",
     "Forgot password?": "Şifrenizi mi unuttunuz?",
-    "Create one now": "Şimdi bir tane oluşturun"
+    "Create one now": "Şimdi bir tane oluşturun",
+    "Account Settings": "Hesap Ayarları",
+    "Manage your account settings and preferences": "Hesap ayarlarınızı ve tercihlerinizi yönetin",
+    "Profile Information": "Profil Bilgileri",
+    "Verified": "Doğrulandı",
+    "Enter first name": "Adınızı girin",
+    "Enter last name": "Soyadınızı girin",
+    "Change Password": "Şifre Değiştir",
+    "Leave blank to keep current password": "Bırakın boş kalsın mevcut şifreyi korumak için",
+    "New Password": "Yeni Şifre",
+    "Enter new password": "Yeni şifreyi girin",
+    "Confirm new password": "Yeni şifreyi onaylayın",
+    "Save Changes": "Değişiklikleri Kaydet",
+    "Cancel": "İptal",
+    "Enter email address": "Email adresinizi girin"
 
 
 
