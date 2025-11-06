@@ -2,7 +2,7 @@
 import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import {useAuth} from "../contexts/Auth/AuthContext"
+import { useAuth } from "../contexts/Auth/AuthContext";
 // Icons
 import { IoCart, IoPerson, IoSettings } from "react-icons/io5";
 import { FaBoxOpen } from "react-icons/fa";
@@ -16,7 +16,7 @@ export default function Navbar() {
   const [displayMenu, setDisplayMenu] = useState(false);
   const [selectedLang, setSelectedLang] = useState("en");
   const { t, i18n } = useTranslation();
-  const{username,isAuthenticated} = useAuth();
+  const { username, isAuthenticated, logout } = useAuth();
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const lang = e.target.value;
@@ -68,86 +68,89 @@ export default function Navbar() {
                 {t("Turkish")}
               </option>
             </select>
-        
+
             {isAuthenticated ? (
-              
-           
-            <div className="relative">
-              <button
-                onClick={handleDisplayMenu}
-                className="flex items-center justify-center w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm hover:bg-white/30 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white/50"
-                aria-label="Account menu"
-              >
-                <MdAccountCircle className="text-3xl text-white hover:scale-110 transition-transform duration-300" />
-              </button>
+              <div className="relative">
+                <button
+                  onClick={handleDisplayMenu}
+                  className="flex items-center justify-center w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm hover:bg-white/30 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white/50"
+                  aria-label="Account menu"
+                >
+                  <MdAccountCircle className="text-3xl text-white hover:scale-110 transition-transform duration-300" />
+                </button>
 
-              {/* Dropdown Menu */}
-              {displayMenu && (
-                <div className="absolute mt-3 right-0 w-52 bg-white shadow-2xl rounded-xl border border-gray-200 py-2 text-base animate-fade-in-down">
-                  
-                 <button
-                    onClick={() => {
-                     
-                      setDisplayMenu(false);
-                    }}
-                    className="w-full text-left px-4 py-3 hover:bg-blue-50 text-gray-700 transition-colors duration-200 flex items-center gap-3 group"
-                  >
-                    <IoPerson className="text-blue-500 group-hover:scale-110 transition-transform duration-200" />
-                    <span className="font-medium">   {username ? `${username.slice(0, username.indexOf("@"))}` : ""}</span>
-                  </button>
+                {/* Dropdown Menu */}
+                {displayMenu && (
+                  <div className="absolute mt-3 right-0 w-52 bg-white shadow-2xl rounded-xl border border-gray-200 py-2 text-base animate-fade-in-down">
+                    <button
+                      onClick={() => {
+                        setDisplayMenu(false);
+                      }}
+                      className="w-full text-left px-4 py-3 hover:bg-blue-50 text-gray-700 transition-colors duration-200 flex items-center gap-3 group"
+                    >
+                      <IoPerson className="text-blue-500 group-hover:scale-110 transition-transform duration-200" />
+                      <span className="font-medium">
+                        {" "}
+                        {username
+                          ? `${username.slice(0, username.indexOf("@"))}`
+                          : ""}
+                      </span>
+                    </button>
 
+                    <button
+                      onClick={() => {
+                        navigate("/settings");
+                        setDisplayMenu(false);
+                      }}
+                      className="w-full text-left px-4 py-3 hover:bg-blue-50 text-gray-700 transition-colors duration-200 flex items-center gap-3 group"
+                    >
+                      <IoSettings className="text-blue-500 group-hover:scale-110 transition-transform duration-200" />
+                      <span className="font-medium">{t("Settings")}</span>
+                    </button>
 
-                  <button
-                    onClick={() => {
-                      navigate("/settings");
-                      setDisplayMenu(false);
-                    }}
-                    className="w-full text-left px-4 py-3 hover:bg-blue-50 text-gray-700 transition-colors duration-200 flex items-center gap-3 group"
-                  >
-                    <IoSettings className="text-blue-500 group-hover:scale-110 transition-transform duration-200" />
-                    <span className="font-medium">{t("Settings")}</span>
-                  </button>
+                    <button
+                      onClick={() => {
+                        navigate("/order");
+                        setDisplayMenu(false);
+                      }}
+                      className="w-full text-left px-4 py-3 hover:bg-blue-50 text-gray-700 transition-colors duration-200 flex items-center gap-3 group"
+                    >
+                      <FaBoxOpen className="text-blue-500 group-hover:scale-110 transition-transform duration-200" />
+                      <span className="font-medium">{t("My Orders")}</span>
+                    </button>
 
-                  <button
-                    onClick={() => {
-                      navigate("/order");
-                      setDisplayMenu(false);
-                    }}
-                    className="w-full text-left px-4 py-3 hover:bg-blue-50 text-gray-700 transition-colors duration-200 flex items-center gap-3 group"
-                  >
-                    <FaBoxOpen className="text-blue-500 group-hover:scale-110 transition-transform duration-200" />
-                    <span className="font-medium">{t("My Orders")}</span>
-                  </button>
+                    <button
+                      onClick={() => {
+                        navigate("/cart");
+                        setDisplayMenu(false);
+                      }}
+                      className="w-full text-left px-4 py-3 hover:bg-blue-50 text-gray-700 transition-colors duration-200 flex items-center gap-3 group"
+                    >
+                      <IoCart className="text-blue-500 group-hover:scale-110 transition-transform duration-200" />
+                      <span className="font-medium">{t("Shopping Cart")}</span>
+                    </button>
 
-                  <button
-                    onClick={() => {
-                      navigate("/cart");
-                      setDisplayMenu(false);
-                    }}
-                    className="w-full text-left px-4 py-3 hover:bg-blue-50 text-gray-700 transition-colors duration-200 flex items-center gap-3 group"
-                  >
-                    <IoCart className="text-blue-500 group-hover:scale-110 transition-transform duration-200" />
-                    <span className="font-medium">{t("Shopping Cart")}</span>
-                  </button>
+                    <hr className="my-2 border-gray-200" />
 
-                  <hr className="my-2 border-gray-200" />
-
-                  <button
-                    onClick={() => {
-                      navigate("/login");
-                      setDisplayMenu(false);
-                    }}
-                    className="w-full text-left px-4 py-3 hover:bg-red-50 text-red-600 transition-colors duration-200 flex items-center gap-3 group"
-                  >
-                    <BiLogOut className="text-red-500 group-hover:scale-110 transition-transform duration-200" />
-                    <span className="font-medium">{t("Logout")}</span>
-                  </button>
-                </div>
-              )}
-            </div>
+                    <button
+                      onClick={() => {
+                        logout();
+                        navigate("/login");
+                        setDisplayMenu(false);
+                      }}
+                      className="w-full text-left px-4 py-3 hover:bg-red-50 text-red-600 transition-colors duration-200 flex items-center gap-3 group"
+                    >
+                      <BiLogOut className="text-red-500 group-hover:scale-110 transition-transform duration-200" />
+                      <span className="font-medium">{t("Logout")}</span>
+                    </button>
+                  </div>
+                )}
+              </div>
             ) : (
               <button
-                onClick={() => { navigate("/login") }}
+                onClick={() => {
+                  navigate("/login");
+                }}
                 className="bg-white/20 backdrop-blur-sm text-sm font-medium px-4 py-2 rounded-lg border border-white/30 hover:bg-white/30 focus:outline-none focus:ring-2 focus:ring-white transition-all duration-300"
               >
                 {t("Login")}
