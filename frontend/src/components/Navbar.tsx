@@ -2,9 +2,9 @@
 import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-
+import {useAuth} from "../contexts/Auth/AuthContext"
 // Icons
-import { IoCart, IoSettings } from "react-icons/io5";
+import { IoCart, IoPerson, IoSettings } from "react-icons/io5";
 import { FaBoxOpen } from "react-icons/fa";
 import { BiLogOut } from "react-icons/bi";
 import { FaShoppingCart } from "react-icons/fa";
@@ -16,6 +16,7 @@ export default function Navbar() {
   const [displayMenu, setDisplayMenu] = useState(false);
   const [selectedLang, setSelectedLang] = useState("en");
   const { t, i18n } = useTranslation();
+  const{username} = useAuth();
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const lang = e.target.value;
@@ -81,7 +82,19 @@ export default function Navbar() {
               {/* Dropdown Menu */}
               {displayMenu && (
                 <div className="absolute mt-3 right-0 w-52 bg-white shadow-2xl rounded-xl border border-gray-200 py-2 text-base animate-fade-in-down">
-             
+                  
+                 <button
+                    onClick={() => {
+                     
+                      setDisplayMenu(false);
+                    }}
+                    className="w-full text-left px-4 py-3 hover:bg-blue-50 text-gray-700 transition-colors duration-200 flex items-center gap-3 group"
+                  >
+                    <IoPerson className="text-blue-500 group-hover:scale-110 transition-transform duration-200" />
+                    <span className="font-medium">   {username ? `${username.slice(0, username.indexOf("@"))}` : ""}</span>
+                  </button>
+
+
                   <button
                     onClick={() => {
                       navigate("/settings");
