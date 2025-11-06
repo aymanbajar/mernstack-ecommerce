@@ -16,7 +16,7 @@ export default function Navbar() {
   const [displayMenu, setDisplayMenu] = useState(false);
   const [selectedLang, setSelectedLang] = useState("en");
   const { t, i18n } = useTranslation();
-  const{username} = useAuth();
+  const{username,isAuthenticated} = useAuth();
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const lang = e.target.value;
@@ -68,8 +68,10 @@ export default function Navbar() {
                 {t("Turkish")}
               </option>
             </select>
-
-            {/* Account Menu */}
+        
+            {isAuthenticated ? (
+              
+           
             <div className="relative">
               <button
                 onClick={handleDisplayMenu}
@@ -143,6 +145,14 @@ export default function Navbar() {
                 </div>
               )}
             </div>
+            ) : (
+              <button
+                onClick={() => { navigate("/login") }}
+                className="bg-white/20 backdrop-blur-sm text-sm font-medium px-4 py-2 rounded-lg border border-white/30 hover:bg-white/30 focus:outline-none focus:ring-2 focus:ring-white transition-all duration-300"
+              >
+                {t("Login")}
+              </button>
+            )}
           </div>
         </div>
       </div>
