@@ -14,8 +14,9 @@ const TOKEN_KEY = "token";
         localStorage.setItem (USERNAME_KEY, username);
         localStorage.setItem (TOKEN_KEY, token);
     }
+    const isAuthenticated = !!token;
     return (
-        <AuthContext.Provider value ={{ username, token, login}}>
+        <AuthContext.Provider value ={{ username, token, login, isAuthenticated}}>
             {children}
         </AuthContext.Provider>
     )
