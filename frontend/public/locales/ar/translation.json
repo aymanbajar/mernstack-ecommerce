@@ -59,7 +59,8 @@
     "Confirm new password": "تأكيد كلمة المرور الجديدة",
     "Save Changes": "حفظ التغييرات",
     "Cancel": "إلغاء",
-    "Enter email address": "أدخل عنوان البريد الإلكتروني"
+    "Enter email address": "أدخل عنوان البريد الإلكتروني",
+    "Login failed. Please check your credentials and try again.": ". فشل تسجيل الدخول. يرجى التحقق من بيانات الاعتماد الخاصة بك وحاول مرة أخرى"
 
     
 
