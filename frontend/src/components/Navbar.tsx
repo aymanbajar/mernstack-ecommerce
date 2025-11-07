@@ -92,7 +92,7 @@ export default function Navbar() {
                       <span className="font-medium">
                         {" "}
                         {username
-                          ? `${username.slice(0, username.indexOf("@"))}`
+                          ? `${username.slice(0, username.indexOf("@")).toUpperCase()}`
                           : ""}
                       </span>
                     </button>
