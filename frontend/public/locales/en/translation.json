@@ -60,7 +60,8 @@
     "Confirm new password": "Confirm new password",
     "Save Changes": "Save Changes",
     "Cancel": "Cancel",
-    "Enter email address": "Enter email address"
+    "Enter email address": "Enter email address",
+    "Login failed. Please check your credentials and try again.": "Login failed. Please check your credentials and try again."
 
 
 
