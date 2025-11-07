@@ -60,7 +60,9 @@
     "Confirm new password": "Yeni şifreyi onaylayın",
     "Save Changes": "Değişiklikleri Kaydet",
     "Cancel": "İptal",
-    "Enter email address": "Email adresinizi girin"
+    "Enter email address": "Email adresinizi girin",
+    "Login failed. Please check your credentials and try again.": "Giriş başarısız oldu. Lütfen kimlik bilgilerinizi kontrol edin ve tekrar deneyin."
+
 
 
 
