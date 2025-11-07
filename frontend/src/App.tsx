@@ -8,6 +8,7 @@ import LoginPage from "./pages/LoginPage";
 import { AuthProvider } from "./contexts/Auth/AuthProvider";
 import SettingsPage from "./pages/SettingsPage";
 import CartPage from "./pages/CartPage";
+import ProtectedRoute from "./components/ProtectedRoute";
 function App() {
   return (
     <>
@@ -24,7 +25,10 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/settings" element={<SettingsPage />} />
-          <Route path="/cart" element={<CartPage />} />
+          <Route element={<ProtectedRoute />}>
+
+              <Route path="/cart" element={<CartPage />} />
+          </Route>
         </Routes>
         {/* footer */}
         <Footer />
