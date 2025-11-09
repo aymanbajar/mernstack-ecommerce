@@ -22,12 +22,18 @@ const createCartForUser = async ({ userId }: CreateCartForUser) => {
 //define interface for get active cart for user
 interface GetActiveCartForUser {
     userId: string;
+    populateProduct?:boolean
 }
 
 //define function for get active cart for user
-export const getActiveCartForUser = async({ userId }: GetActiveCartForUser) =>{
+export const getActiveCartForUser = async({ userId ,populateProduct}: GetActiveCartForUser) =>{
     // find active cart for user
-    let cart = await cartModel.findOne({ userId, status: "active" });
+    let cart ;
+    if(populateProduct){
+      cart = await cartModel.findOne({ userId, status: "active" }).populate("items.product");
+    }else{
+      cart = await cartModel.findOne({ userId, status: "active" });
+    }
 
     //check if cart exists
     if (!cart) {
@@ -67,9 +73,9 @@ export const addItemToCart =  async({userId,productId,quantity}:AddItemToCart) =
     // update total amount
     cart.totalAmount += product.price * quantity;
     // save cart to database
-    const updatedCart = await cart.save();
+     await cart.save();
     // return success message
-    return {data:updatedCart,statusCode:200};
+    return {data: await getActiveCartForUser({userId,populateProduct:true}),statusCode:200};
 
 }
 
@@ -106,9 +112,9 @@ export const updateItemInCart = async({userId,productId,quantity}:UpdateItemInCa
     // assign total to cart
     cart.totalAmount = total;
     // save cart to database
-    const updatedCart = await cart.save();
+    await cart.save();
     // return success message
-    return {data:updatedCart,statusCode:200};
+    return {data: await getActiveCartForUser({userId,populateProduct:true}),statusCode:200};
 }
 
 // define interface for remove item from cart
@@ -136,9 +142,9 @@ export const deleteItemInCart =  async({userId,productId}:DeleteItemInCart) =>{
   // update total amount
   cart.totalAmount = total;
   // save cart to database
-  const updatedCart = await cart.save();
+  await cart.save();
   // return success message
-  return {data:updatedCart,statusCode:200};
+  return {data: await getActiveCartForUser({userId,populateProduct:true}),statusCode:200};
 }
 
 // calculate total amount of cart
@@ -164,9 +170,9 @@ export const clearCart = async({userId}:ClearCart) =>{
   //set total amount to zero
   cart.totalAmount = 0;
   //save cart to database
-  const updatedCart = await cart.save();
+   await cart.save();
   //return success message
-  return {data:updatedCart,statusCode:200};
+  return {data: await getActiveCartForUser({userId,populateProduct:true}),statusCode:200};
 }
 
 //define interfacr for checkut params
