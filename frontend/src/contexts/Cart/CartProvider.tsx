@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { type FC, type PropsWithChildren, useState } from "react";
 import { CartContext } from "./CartContext";
 import axios from "axios";
@@ -29,6 +30,10 @@ export const CartProvider: FC<PropsWithChildren> = ({ children }) => {
         return;
       }
       const cart = await response.data;
+      if(!cart){
+        setError("Failed to retrieve updated cart");
+      }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const cartItemsMapped = cart.items.map(({ product, quantity }: { product: any; quantity: number }) => ({
         productId: product._id,
         title: product.title,
