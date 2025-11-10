@@ -25,21 +25,23 @@ export const CartProvider: FC<PropsWithChildren> = ({ children }) => {
           },
         }
       );
-      if (!response.data) {
-        setError("Failed to add item to cart");
-        return;
-      }
+        if (response.status !== 200 && response.status !== 201) {
+      setError("Failed to add to cart");
+      return;
+    }
+
       const cart = await response.data;
       if(!cart){
         setError("Failed to retrieve updated cart");
       }
+      console.log("Updated Cart:", cart);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const cartItemsMapped = cart.items.map(({ product, quantity }: { product: any; quantity: number }) => ({
         productId: product._id,
         title: product.title,
         image: product.image,
         quantity,
-        unitPrice: product.price,
+        unitPrice: product.unitPrice,
       }));
       setCartItems([...cartItemsMapped]);
       setTotalAmount(cart.totalAmount);
