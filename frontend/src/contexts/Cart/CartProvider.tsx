@@ -6,9 +6,10 @@ import type { CartItem } from "../../types/CartItem";
 import { BASE_URL } from "../../constants/BASE_URL";
 import { useAuth } from "../Auth/AuthContext";
 export const CartProvider: FC<PropsWithChildren> = ({ children }) => {
+   const { token } = useAuth();
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [totalAmount, setTotalAmount] = useState<number>(0);
-  const { token } = useAuth();
+ 
   const [error, setError] = useState<string | null>(null);
   const addItemToCart = async (productId: string) => {
     try {
@@ -30,7 +31,7 @@ export const CartProvider: FC<PropsWithChildren> = ({ children }) => {
       return;
     }
 
-      const cart = await response.data;
+      const cart = await response.data.data;
       if(!cart){
         setError("Failed to retrieve updated cart");
       }
