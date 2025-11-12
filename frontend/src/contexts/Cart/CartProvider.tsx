@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { type FC, type PropsWithChildren, useState } from "react";
+import { type FC, type PropsWithChildren, useEffect, useState } from "react";
 import { CartContext } from "./CartContext";
 import axios from "axios";
 import type { CartItem } from "../../types/CartItem";
@@ -11,6 +11,24 @@ export const CartProvider: FC<PropsWithChildren> = ({ children }) => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [totalAmount, setTotalAmount] = useState<number>(0);
   const [error, setError] = useState<string | null>(null);
+    const fetchCart = async () => {
+  const  response  =  await axios.get(`${BASE_URL}/cart`, {
+    headers: { Authorization: `Bearer ${token}` }
+  })
+  const cart = response.data;
+  const cartItemsMapped = cart.items.map(({product ,quantity ,unitPrice}: {product:any,quantity:number,unitPrice:number}) => ({
+    productId: product._id,
+    title: product.title,
+    image: product.image,
+    quantity,
+    unitPrice
+  }));
+
+  setCartItems(cartItemsMapped);
+  setTotalAmount(cart.totalAmount);
+};
+
+
   const addItemToCart = async (productId: string) => {
     try {
       const response = await axios.post(
@@ -53,8 +71,13 @@ export const CartProvider: FC<PropsWithChildren> = ({ children }) => {
     }
   };
 
+    useEffect(() => {
+ 
+    fetchCart();
+  },[token])
+
   return (
-    <CartContext.Provider value={{ cartItems, totalAmount, addItemToCart }}>
+    <CartContext.Provider value={{ cartItems, totalAmount, addItemToCart ,fetchCart}}>
       {children}
     </CartContext.Provider>
   );
