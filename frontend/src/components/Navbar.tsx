@@ -9,7 +9,7 @@ import { FaBoxOpen } from "react-icons/fa";
 import { BiLogOut } from "react-icons/bi";
 import { FaShoppingCart } from "react-icons/fa";
 import { MdAccountCircle } from "react-icons/md";
-
+import { useCart } from "../contexts/Cart/CartContext";
 export default function Navbar() {
   const navigate = useNavigate(); //navigate hook from react-router
   //states
@@ -17,6 +17,7 @@ export default function Navbar() {
   const [selectedLang, setSelectedLang] = useState("en");
   const { t, i18n } = useTranslation();
   const { username, isAuthenticated, logout } = useAuth();
+  const { cartItems } = useCart();
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const lang = e.target.value;
@@ -128,6 +129,11 @@ export default function Navbar() {
                     >
                       <IoCart className="text-blue-500 group-hover:scale-110 transition-transform duration-200" />
                       <span className="font-medium">{t("Shopping Cart")}</span>
+                      {cartItems.length == 0 ? null : (
+                        <span className="ml-auto inline-block bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded-full">
+                          {cartItems.length}
+                        </span>
+                      )}
                     </button>
 
                     <hr className="my-2 border-gray-200" />
