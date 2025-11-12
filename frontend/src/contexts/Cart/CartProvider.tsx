@@ -46,12 +46,8 @@ export const CartProvider: FC<PropsWithChildren> = ({ children }) => {
         })
       );
 
-
       setCartItems((prev) => [...prev, ...cartItemsMapped]);
       setTotalAmount(cart.totalAmount);
-
-        console.log("Raw items from server:", cart.items);
-        console.log("Mapped items:", cartItemsMapped);
     } catch (err) {
       console.error("Failed to add item to cart:", err);
     }
