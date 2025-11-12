@@ -34,7 +34,7 @@ router.post('/items',validateJWT,async (req:ExtendRequest,res)=>{
  //add items to cart
  const {statusCode,data} = await addItemToCart({userId,productId,quantity});
  //send response
- res.status(statusCode).send({data});
+ res.status(statusCode).send(data);
 
   }catch(err){
     res.status(500).send("something went wrong!");
