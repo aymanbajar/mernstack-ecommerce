@@ -121,7 +121,7 @@ export default function CartPage() {
               </button>
 
               <Link
-                to="/shop"
+                to="/"
                 className="block w-full py-3 text-center text-purple-600 font-semibold hover:text-pink-600 transition-colors duration-300"
               >
                 {t("cart continueShopping")}
