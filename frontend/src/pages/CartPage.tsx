@@ -16,7 +16,7 @@ export default function CartPage() {
             <FaShoppingCart className="text-6xl text-gray-400" />
           </div>
           <h2 className="text-3xl font-bold text-gray-800 mb-4">
-            {t("cart empty !")}
+            {t("cart empty !")} 
           </h2>
 
           <Link
@@ -88,7 +88,7 @@ export default function CartPage() {
                   {/* Subtotal */}
                   <div className="flex md:flex-col items-center md:items-end justify-between md:justify-center gap-4">
                     <span className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                      subAmout : ${(item.unitPrice || 0) * item.quantity}
+                      {t("subtotal")} : ${(item.unitPrice || 0) * item.quantity}
                     </span>
                   </div>
                 </div>
