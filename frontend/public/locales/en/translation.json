@@ -61,7 +61,17 @@
     "Save Changes": "Save Changes",
     "Cancel": "Cancel",
     "Enter email address": "Enter email address",
-    "Login failed. Please check your credentials and try again.": "Login failed. Please check your credentials and try again."
+    "Login failed. Please check your credentials and try again.": "Login failed. Please check your credentials and try again.",
+     "cart order Summary": "cart order Summary",
+    "cart total": " cart total",
+    "cart checkout": "cart checkout",
+    "cart continueShopping": "cart continueShopping",
+    "cart secure checkout": "cart secure checkout",
+    "cart free shipping": "cart free shipping",
+    "subtotal": "subtotal",
+    "continue Shopping": "continue Shopping",
+    "cart empty !": "cart empty !"  
+
 
 
 
