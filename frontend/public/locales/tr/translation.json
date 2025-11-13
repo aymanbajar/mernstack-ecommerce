@@ -61,7 +61,16 @@
     "Save Changes": "Değişiklikleri Kaydet",
     "Cancel": "İptal",
     "Enter email address": "Email adresinizi girin",
-    "Login failed. Please check your credentials and try again.": "Giriş başarısız oldu. Lütfen kimlik bilgilerinizi kontrol edin ve tekrar deneyin."
+    "Login failed. Please check your credentials and try again.": "Giriş başarısız oldu. Lütfen kimlik bilgilerinizi kontrol edin ve tekrar deneyin.",
+     "cart order Summary": "Öğe Özeti",       
+    "cart total": "Sepet Toplamı",
+    "cart checkout": "Sepeti Onayla",
+    "cart continueShopping": "Alışverişe Devam Et",
+    "cart secure checkout": "Güvenli Ödeme",
+    "cart free shipping": "Ücretsiz Kargo",
+    "subtotal": "Ara Toplam",
+    "continue Shopping": "Alışverişe Devam Et",
+    "cart empty !": "Sepet Boş"  
 
 
 
