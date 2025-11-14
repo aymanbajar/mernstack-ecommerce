@@ -5,8 +5,12 @@ import { MdShoppingCartCheckout } from "react-icons/md";
 import { Link } from "react-router-dom";
 
 export default function CartPage() {
-  const { cartItems, totalAmount } = useCart();
+  const { cartItems, totalAmount, updateItemInCart } = useCart();
   const { t } = useTranslation();
+  const handleQuantity = (productId: string, quantity: number) => {
+    if (quantity <= 0) return;
+    updateItemInCart(productId, quantity);
+  };
 
   if (cartItems.length === 0) {
     return (
@@ -16,7 +20,7 @@ export default function CartPage() {
             <FaShoppingCart className="text-6xl text-gray-400" />
           </div>
           <h2 className="text-3xl font-bold text-gray-800 mb-4">
-            {t("cart empty !")} 
+            {t("cart empty !")}
           </h2>
 
           <Link
@@ -68,13 +72,23 @@ export default function CartPage() {
                     {/* Quantity Controls */}
                     <div className="flex items-center gap-4 mt-4">
                       <div className="flex items-center gap-3 bg-gray-100 rounded-full px-4 py-2">
-                        <button className="w-8 h-8 flex items-center justify-center bg-white rounded-full hover:bg-gradient-to-r hover:from-purple-600 hover:to-pink-600 hover:text-white transition-all duration-300 shadow-md">
+                        <button
+                          onClick={() =>
+                            handleQuantity(item.productId, item.quantity - 1)
+                          }
+                          className="w-8 h-8 flex items-center justify-center bg-white rounded-full hover:bg-gradient-to-r hover:from-purple-600 hover:to-pink-600 hover:text-white transition-all duration-300 shadow-md"
+                        >
                           <FaMinus className="text-sm" />
                         </button>
                         <span className="font-semibold text-gray-800 min-w-[2rem] text-center">
                           {item.quantity}
                         </span>
-                        <button className="w-8 h-8 flex items-center justify-center bg-white rounded-full hover:bg-gradient-to-r hover:from-purple-600 hover:to-pink-600 hover:text-white transition-all duration-300 shadow-md">
+                        <button
+                          onClick={() =>
+                            handleQuantity(item.productId, item.quantity + 1)
+                          }
+                          className="w-8 h-8 flex items-center justify-center bg-white rounded-full hover:bg-gradient-to-r hover:from-purple-600 hover:to-pink-600 hover:text-white transition-all duration-300 shadow-md"
+                        >
                           <FaPlus className="text-sm" />
                         </button>
                       </div>
