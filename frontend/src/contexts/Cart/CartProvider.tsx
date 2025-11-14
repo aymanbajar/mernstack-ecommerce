@@ -11,24 +11,36 @@ export const CartProvider: FC<PropsWithChildren> = ({ children }) => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [totalAmount, setTotalAmount] = useState<number>(0);
   const [error, setError] = useState<string | null>(null);
-    const fetchCart = async () => {
-  const  response  =  await axios.get(`${BASE_URL}/cart`, {
-    headers: { Authorization: `Bearer ${token}` }
-  })
-  const cart = response.data;
-  const cartItemsMapped = cart.items.map(({product ,quantity ,unitPrice}: {product:any,quantity:number,unitPrice:number}) => ({
-    productId: product._id,
-    title: product.title,
-    image: product.image,
-    quantity,
-    unitPrice
-  }));
+  
+  // Fetch cart data from the backend
+  const fetchCart = async () => {
+    const response = await axios.get(`${BASE_URL}/cart`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const cart = response.data;
+    const cartItemsMapped = cart.items.map(
+      ({
+        product,
+        quantity,
+        unitPrice,
+      }: {
+        product: any;
+        quantity: number;
+        unitPrice: number;
+      }) => ({
+        productId: product._id,
+        title: product.title,
+        image: product.image,
+        quantity,
+        unitPrice,
+      })
+    );
 
-  setCartItems(cartItemsMapped);
-  setTotalAmount(cart.totalAmount);
-};
+    setCartItems(cartItemsMapped);
+    setTotalAmount(cart.totalAmount);
+  };
 
-
+  // Add item to cart
   const addItemToCart = async (productId: string) => {
     try {
       const response = await axios.post(
@@ -71,13 +83,57 @@ export const CartProvider: FC<PropsWithChildren> = ({ children }) => {
     }
   };
 
-    useEffect(() => {
- 
+//update cart when token changes
+
+const updateItemInCart = async (productId: string, quantity: number) => {
+   try{
+    const  response =  await axios.put(`${BASE_URL}/cart/items`,
+      {
+        productId,
+        quantity
+      },{
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
+    if(response.status !== 200 && response.status !== 201){
+      setError("Failed to update cart item");
+      return;
+    }
+    const cart = response.data;
+    
+    if (!cart) {
+      setError("Failed to parse cart data");
+    }
+    const cartItemsMapped =  cart.items.map(({ product, quantity }: { product: any; quantity: number }) => ({
+      productId: product._id,
+      title: product.title,
+      image: product.image,
+      quantity,
+      unitPrice: product.price,
+
+    }));
+
+    setCartItems(cartItemsMapped);
+    setTotalAmount(cart.totalAmount);
+
+   }catch(err){
+    console.error("Failed to update cart item:", err);
+   }
+
+}
+
+
+  useEffect(() => {
     fetchCart();
-  },[token])
+  }, [token]);
 
   return (
-    <CartContext.Provider value={{ cartItems, totalAmount, addItemToCart ,fetchCart}}>
+    <CartContext.Provider
+      value={{ cartItems, totalAmount, addItemToCart, fetchCart ,updateItemInCart}}
+    >
       {children}
     </CartContext.Provider>
   );
