@@ -103,12 +103,12 @@ export const CartProvider: FC<PropsWithChildren> = ({ children }) => {
           },
         }
       );
-      
+
       if (response.status !== 200 && response.status !== 201) {
         console.error("Failed to update cart item");
         return;
       }
-      
+
       // ✅ تحقق من data.data أولاً مثل fetchCart
       const cart = response.data.data || response.data;
 
@@ -116,9 +116,17 @@ export const CartProvider: FC<PropsWithChildren> = ({ children }) => {
         console.error("Failed to parse cart data");
         return; // ✅ أضفنا return هنا
       }
-      
+
       const cartItemsMapped = cart.items.map(
-        ({ product, quantity, unitPrice }: { product: any; quantity: number; unitPrice: number }) => ({
+        ({
+          product,
+          quantity,
+          unitPrice,
+        }: {
+          product: any;
+          quantity: number;
+          unitPrice: number;
+        }) => ({
           productId: product._id,
           title: product.title,
           image: product.image,
@@ -134,6 +142,33 @@ export const CartProvider: FC<PropsWithChildren> = ({ children }) => {
     }
   };
 
+  //delete item from cart
+  const deleteItemInCart = async (productId: string) => {
+    try {
+      const response = await axios.delete(`${BASE_URL}/cart`, {
+        data: {
+          productId,
+        },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.status !== 200 && response.status !== 201) {
+        console.error("Failed to delete cart item");
+        return;
+      }
+      const  cart = response.data.data || response.data;
+     const cartItemFiltered = cartItems.filter((item => item.productId !== productId));
+     setCartItems( cartItemFiltered);
+     setTotalAmount(cart.totalAmount);
+
+
+    } catch (err) {
+      console.error("Failed to delete cart item:", err);
+    }
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -142,6 +177,7 @@ export const CartProvider: FC<PropsWithChildren> = ({ children }) => {
         addItemToCart,
         fetchCart,
         updateItemInCart,
+        deleteItemInCart,
       }}
     >
       {children}
