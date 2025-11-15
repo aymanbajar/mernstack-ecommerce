@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useCart } from "../contexts/Cart/CartContext";
 import { useTranslation } from "react-i18next";
 import { FaTrash, FaShoppingCart, FaMinus, FaPlus } from "react-icons/fa";
