@@ -75,7 +75,7 @@ export const CartProvider: FC<PropsWithChildren> = ({ children }) => {
         })
       );
 
-      setCartItems((prev) => [...prev, ...cartItemsMapped]);
+      setCartItems(cartItemsMapped);
       setTotalAmount(cart.totalAmount);
     } catch (err) {
       console.error("Failed to add item to cart:", err);
