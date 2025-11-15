@@ -145,7 +145,7 @@ export const CartProvider: FC<PropsWithChildren> = ({ children }) => {
   //delete item from cart
   const deleteItemInCart = async (productId: string) => {
     try {
-      const response = await axios.delete(`${BASE_URL}/cart`, {
+      const response = await axios.delete(`${BASE_URL}/cart/items/${productId}`, {
         data: {
           productId,
         },
