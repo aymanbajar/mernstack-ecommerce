@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useCart } from "../contexts/Cart/CartContext";
 import { useTranslation } from "react-i18next";
 import { FaTrash, FaShoppingCart, FaMinus, FaPlus } from "react-icons/fa";
@@ -5,7 +6,7 @@ import { MdShoppingCartCheckout } from "react-icons/md";
 import { Link } from "react-router-dom";
 
 export default function CartPage() {
-  const { cartItems, totalAmount, updateItemInCart } = useCart();
+  const { cartItems, totalAmount, updateItemInCart,deleteItemInCart } = useCart();
   const { t } = useTranslation();
   const handleQuantity = (productId: string, quantity: number) => {
     if (quantity <= 0) return;
@@ -93,7 +94,9 @@ export default function CartPage() {
                         </button>
                       </div>
 
-                      <button className="p-3 text-red-500 hover:bg-red-50 rounded-full transition-all duration-300 hover:scale-110">
+                      <button
+                      onClick={() =>deleteItemInCart(item.productId)}
+                      className="p-3 text-red-500 hover:bg-red-50 rounded-full transition-all duration-300 hover:scale-110">
                         <FaTrash className="text-lg" />
                       </button>
                     </div>
