@@ -169,6 +169,28 @@ export const CartProvider: FC<PropsWithChildren> = ({ children }) => {
     }
   };
 
+//clear cart 
+
+const  clearCart = async () => {
+  try{
+    const  response = await axios.delete(`${BASE_URL}/cart`,{
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    if (response.status !== 200 && response.status !==201){
+      console.error("Failed to clear cart");
+      return;
+    }
+    setCartItems([]);
+    setTotalAmount(0);
+  } catch (err) {
+    console.error("Failed to clear cart:", err);
+  }
+}
+
+
   return (
     <CartContext.Provider
       value={{
@@ -178,6 +200,7 @@ export const CartProvider: FC<PropsWithChildren> = ({ children }) => {
         fetchCart,
         updateItemInCart,
         deleteItemInCart,
+        clearCart,
       }}
     >
       {children}
