@@ -5,7 +5,7 @@ import { MdShoppingCartCheckout } from "react-icons/md";
 import { Link } from "react-router-dom";
 
 export default function CartPage() {
-  const { cartItems, totalAmount, updateItemInCart,deleteItemInCart } = useCart();
+  const { cartItems, totalAmount, updateItemInCart,deleteItemInCart , clearCart} = useCart();
   const { t } = useTranslation();
   const handleQuantity = (productId: string, quantity: number) => {
     if (quantity <= 0) return;
@@ -159,9 +159,18 @@ export default function CartPage() {
                     <span>{t("cart free shipping")}</span>
                   </div>
                 </div>
+                   <div>
+          <button
+                onClick={() => clearCart()}
+                className="mt-4 w-full py-3 bg-red-600 text-white rounded-full font-bold text-lg hover:bg-red-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+              >
+                {t("cart clear cart")}
+              </button>
+          </div>
               </div>
             </div>
           </div>
+       
         </div>
       </div>
     </div>
