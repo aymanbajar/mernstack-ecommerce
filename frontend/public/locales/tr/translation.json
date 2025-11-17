@@ -70,7 +70,9 @@
     "cart free shipping": "Ücretsiz Kargo",
     "subtotal": "Ara Toplam",
     "continue Shopping": "Alışverişe Devam Et",
-    "cart empty !": "Sepet Boş"  
+    "cart empty !": "Sepet Boş"  ,
+    "clear cart": "Sepeti Temizle",
+    "checkout": "Ödeme"
 
 
 
