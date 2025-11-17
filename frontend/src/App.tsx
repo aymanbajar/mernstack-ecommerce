@@ -10,6 +10,7 @@ import SettingsPage from "./pages/SettingsPage";
 import CartPage from "./pages/CartPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { CartProvider } from "./contexts/Cart/CartProvider";
+import CheckoutPage from "./pages/CheckoutPage";
 function App() {
   return (
     <>
@@ -30,6 +31,7 @@ function App() {
               <Route path="/settings" element={<SettingsPage />} />
               <Route element={<ProtectedRoute />}>
                 <Route path="/cart" element={<CartPage />} />
+                <Route path="/checkout" element={<CheckoutPage />} />
               </Route>
             </Routes>
             {/* footer */}
