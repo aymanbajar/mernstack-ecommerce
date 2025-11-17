@@ -1,9 +1,8 @@
 import { useCart } from "../contexts/Cart/CartContext";
 import { useTranslation } from "react-i18next";
 import { FaTrash, FaShoppingCart, FaMinus, FaPlus } from "react-icons/fa";
-import { MdShoppingCartCheckout } from "react-icons/md";
 import { Link } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 export default function CartPage() {
   const { cartItems, totalAmount, updateItemInCart,deleteItemInCart , clearCart} = useCart();
   const { t } = useTranslation();
@@ -11,6 +10,7 @@ export default function CartPage() {
     if (quantity <= 0) return;
     updateItemInCart(productId, quantity);
   };
+  const navigate = useNavigate();
 
   if (cartItems.length === 0) {
     return (
@@ -37,8 +37,13 @@ export default function CartPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 py-12 px-4">
+      <div className="max-w-7xl mx-auto mb-8 flex items-center justify-between">
+        <button className="px-4 py-2 bg-red-600 text-white rounded" onClick={clearCart}>clear cart</button>
+        <button className="px-4 py-2 bg-green-600 text-white rounded" onClick={() => navigate('/checkout')}>checkout</button>
+      </div>
+      
       <div className="max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="grid lg:grid-cols-2 gap-8">
           {/* Cart Items */}
           <div className="lg:col-span-2 space-y-4">
             {cartItems.map((item) => (
@@ -112,64 +117,7 @@ export default function CartPage() {
             ))}
           </div>
 
-          {/* Order Summary */}
-          <div className="lg:col-span-1">
-            <div className="bg-white rounded-2xl shadow-lg p-6 sticky top-24 border border-gray-100">
-              <h2 className="text-2xl font-bold text-gray-800 mb-6">
-                {t("cart order Summary")}
-              </h2>
-
-              <div className="space-y-4 mb-6">
-                <div className="h-px bg-gradient-to-r from-purple-200 via-pink-200 to-purple-200"></div>
-                <div className="flex justify-between items-center">
-                  <span className="text-xl font-bold text-gray-800">
-                    {t("cart total")}
-                  </span>
-                  <span className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                    ${totalAmount}
-                  </span>
-                </div>
-              </div>
-
-              <button className="w-full py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full font-bold text-lg hover:from-purple-700 hover:to-pink-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center justify-center gap-3 mb-4">
-                <MdShoppingCartCheckout className="text-2xl" />
-                {t("cart checkout")}
-              </button>
-
-              <Link
-                to="/"
-                className="block w-full py-3 text-center text-purple-600 font-semibold hover:text-pink-600 transition-colors duration-300"
-              >
-                {t("cart continueShopping")}
-              </Link>
-
-              {/* Trust Badges */}
-              <div className="mt-6 pt-6 border-t border-gray-200">
-                <div className="grid grid-cols-2 gap-4 text-center text-xs text-gray-600">
-                  <div className="flex flex-col items-center gap-2">
-                    <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
-                      ✓
-                    </div>
-                    <span>{t("cart secure checkout")}</span>
-                  </div>
-                  <div className="flex flex-col items-center gap-2">
-                    <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                      🚚
-                    </div>
-                    <span>{t("cart free shipping")}</span>
-                  </div>
-                </div>
-                   <div>
-          <button
-                onClick={() => clearCart()}
-                className="mt-4 w-full py-3 bg-red-600 text-white rounded-full font-bold text-lg hover:bg-red-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-              >
-                {t("cart clear cart")}
-              </button>
-          </div>
-              </div>
-            </div>
-          </div>
+       
        
         </div>
       </div>
