@@ -38,8 +38,8 @@ export default function CartPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 py-12 px-4">
       <div className="max-w-7xl mx-auto mb-8 flex items-center justify-between">
-        <button className="px-4 py-2 bg-red-600 text-white rounded" onClick={clearCart}>clear cart</button>
-        <button className="px-4 py-2 bg-green-600 text-white rounded" onClick={() => navigate('/checkout')}>checkout</button>
+        <button className="px-4 py-2 bg-red-600 text-white rounded" onClick={clearCart}>{t("clear cart")}</button>
+        <button className="px-4 py-2 bg-green-600 text-white rounded" onClick={() => navigate('/checkout')}>{t("checkout")}</button>
       </div>
       
       <div className="max-w-7xl mx-auto">
