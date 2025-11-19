@@ -11,6 +11,8 @@ import CartPage from "./pages/CartPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { CartProvider } from "./contexts/Cart/CartProvider";
 import CheckoutPage from "./pages/CheckoutPage";
+import MyOrderPage from "./pages/MyOrderPage";
+
 function App() {
   return (
     <>
