@@ -8,11 +8,29 @@ import {
   FaCheckCircle,
 } from "react-icons/fa";
 import { MdPayment } from "react-icons/md";
+import { BASE_URL } from "../constants/BASE_URL";
+import axios from "axios";
 
 export default function CheckoutPage() {
   const { t } = useTranslation();
   const { cartItems, totalAmount } = useCart();
   const [address, setAddress] = useState("");
+  
+  const handleConfirmOrder = async () => {
+    if (!address)  return;
+    const response =  await axios.post(`${BASE_URL}/cart/checkout`,
+      {address
+      },{
+         headers: {
+        'Content-Type': 'application/json',
+      },
+      }
+
+    )
+    if(response.status !== 200){
+      return;
+  }
+  }
 
   return (
     <div className="min-h-screen bg-linear-to-br from-gray-50 via-white to-purple-50 py-12 px-4">
@@ -75,7 +93,10 @@ export default function CheckoutPage() {
               </div>
 
               {/* Pay Button */}
-              <button className="w-full mt-6 py-4 bg-linear-to-r from-purple-600 to-pink-600 text-white rounded-full font-bold text-lg hover:from-purple-700 hover:to-pink-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center justify-center gap-3">
+              <button 
+              onClick={() => handleConfirmOrder()}
+              className="w-full mt-6 py-4 bg-linear-to-r from-purple-600 to-pink-600 text-white rounded-full font-bold text-lg hover:from-purple-700 hover:to-pink-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center justify-center gap-3">
+                  
                 <FaCheckCircle className="text-2xl" />
                 {t("Pay Now")}
               </button>
