@@ -79,8 +79,13 @@
     "Pay Now": "Öde Şimdi",
     "Shipping Information": "Gönderim Bilgileri",
     "Address": "Adres",
-    "Payment Method": "Ödeme Yöntemi"
-
+    "Payment Method": "Ödeme Yöntemi",
+    
+    "Order Success!": "Sipariş Başarılı!",
+    "Thank you for your purchase! Your order has been confirmed.": "Satın almanız için teşekkürler! Siparişiniz onaylandı.",
+    "View Orders": "Siparişleri Görüntüle",
+    "Back to Home": "Ana Sayfaya Dön",
+    "Need help? Contact our support team at": "Yardıma mı ihtiyacınız var? Destek ekibimizle iletişime geçin"
 
 
 
