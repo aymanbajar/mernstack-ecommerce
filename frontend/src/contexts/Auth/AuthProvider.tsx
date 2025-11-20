@@ -34,7 +34,7 @@ const TOKEN_KEY = "token";
         if(response.status !== 200){
             throw new Error ("Unable to fetch orders");
         }
-        const orders = response.data || response.data.data;
+        const orders = response.data ;
         setMyOrders(orders);
 
     }
