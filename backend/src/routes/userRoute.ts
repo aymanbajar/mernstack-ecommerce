@@ -43,7 +43,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.get("my-orders",validateJWT,async(req:ExtendRequest,res) => {
+router.get("/my-orders",validateJWT,async(req:ExtendRequest,res) => {
   try{
     const userId = req.user._id;
     const {data, statusCode} = await getMyOrders({userId});
