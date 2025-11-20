@@ -83,7 +83,22 @@
     "Thank you for your purchase! Your order has been confirmed.": "! شكرًا لشرائك! تم تأكيد طلبك",
     "View Orders": "عرض الطلبات",
     "Back to Home": "العودة إلى الصفحة الرئيسية",
-    "Need help? Contact our support team at": "هل تحتاج إلى مساعدة؟ اتصل بفريق الدعم لدينا على"
+    "Need help? Contact our support team at": "هل تحتاج إلى مساعدة؟ اتصل بفريق الدعم لدينا على",
+    "No Orders Yet": "لا توجد طلبات حتى الآن",
+    "You haven't placed any orders yet. Start shopping now!": "! لم تقم بوضع أي طلبات حتى الآن. ابدأ التسوق الآن",
+    "Track and manage your orders": "تتبع وادارة طلباتك"  ,
+    "Order ID": "معرف الطلب",
+    "Recent": "الأحدث",
+    "Processing": "قيد المعالجة",
+    "Shipping Address": "عنوان الشحن",
+    "Items": "العناصر",
+    "items": "العناصر",
+    "Order Items": "عناصر الطلب",
+    "Product": "المنتج",
+    "Qty": "الكمية",
+    "Total Amount": "المبلغ الإجمالي"
+    
+
 
 
 
