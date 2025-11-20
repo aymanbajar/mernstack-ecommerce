@@ -111,7 +111,7 @@ export default function Navbar() {
 
                     <button
                       onClick={() => {
-                        navigate("/order");
+                        navigate("/my-orders");
                         setDisplayMenu(false);
                       }}
                       className="w-full text-left px-4 py-3 hover:bg-blue-50 text-gray-700 transition-colors duration-200 flex items-center gap-3 group"
