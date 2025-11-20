@@ -40,7 +40,7 @@ export default function OrderSuccessPage() {
                     {/* Action Buttons */}
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                         <Link
-                            to="/orders"
+                            to="/my-orders"
                             className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-linear-to-r from-green-600 to-emerald-600 text-white rounded-full font-bold text-lg hover:from-green-700 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                         >
                             <FaShoppingBag />
