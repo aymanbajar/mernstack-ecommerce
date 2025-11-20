@@ -1,6 +1,7 @@
 import { userModel } from "../models/userModel.ts";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { orderModel } from "../models/orderModel.ts";
 // register parameters interface
 interface RegisterParams{
     firstName:string;
@@ -50,6 +51,23 @@ export const  login = async ({email,password}:LoginParams) => {
     }
     // return user
     return {data : generateJWT({firstName:findUser.firstName, lastName:findUser.lastName, email}),statusCode : 200};
+}
+
+//interface for get orders parameters
+interface GetOrdersParams {
+    userId:string;
+}   
+
+
+//get my orders function
+export const getMyOrders = async({userId}: GetOrdersParams) => {
+    try{
+       return {data : await orderModel.find({userId}), statusCode : 200};
+
+    }catch(err){
+        throw new Error("Unable to get orders");
+    }
+
 }
 
 
