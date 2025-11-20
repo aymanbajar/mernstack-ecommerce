@@ -6,6 +6,7 @@ interface AuthContextType{
     login : (username:string, token:string) => void;
     isAuthenticated: boolean;
     logout: () => void;
+    getMyOrders:() => void;
 }
 
 //define context
@@ -14,7 +15,8 @@ export const AuthContext  = createContext<AuthContextType >({
     token : null,
     login : () => {},
     isAuthenticated : false,
-    logout : () => {}
+    logout : () => {},
+    getMyOrders : () => {},
 });
 
 
