@@ -80,15 +80,31 @@
     "Shipping Information": "Gönderim Bilgileri",
     "Address": "Adres",
     "Payment Method": "Ödeme Yöntemi",
-    
     "Order Success!": "Sipariş Başarılı!",
     "Thank you for your purchase! Your order has been confirmed.": "Satın almanız için teşekkürler! Siparişiniz onaylandı.",
     "View Orders": "Siparişleri Görüntüle",
     "Back to Home": "Ana Sayfaya Dön",
-    "Need help? Contact our support team at": "Yardıma mı ihtiyacınız var? Destek ekibimizle iletişime geçin"
-
+    "Need help? Contact our support team at": "Yardıma mı ihtiyacınız var? Destek ekibimizle iletişime geçin",
+    "No Orders Yet": "Henüz Sipariş Yok",
+    "You haven't placed any orders yet. Start shopping now!": " Henüz sipariş vermediniz. Hemen alışverişe başlayın!",   ,
+    "Track and manage your orders": "Siparişlerinizi takip edin ve yönetin",
+    "Order ID": "Sipariş ID",
+    "Recent": "Son",
+    "Processing": "İşleniyor",
+    "Shipping Address": "Gönderim Adresi",
+    "Items": "Öğeler",
+    "items": "öğeler",
+    "Order Items": "Sipariş Öğeleri",
+    "Product": "Ürün",
+    "Qty": "Adet",
+    "Total Amount": "Toplam Tutar"
+    
 
 
 
 
 }
+
+
+
+
