@@ -10,11 +10,15 @@ import {
 import { MdPayment } from "react-icons/md";
 import { BASE_URL } from "../constants/BASE_URL";
 import axios from "axios";
+import { useAuth } from "../contexts/Auth/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export default function CheckoutPage() {
   const { t } = useTranslation();
   const { cartItems, totalAmount } = useCart();
   const [address, setAddress] = useState("");
+  const {token} = useAuth();
+  const navigate = useNavigate();
   
   const handleConfirmOrder = async () => {
     if (!address)  return;
@@ -23,6 +27,7 @@ export default function CheckoutPage() {
       },{
          headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
       },
       }
 
@@ -30,6 +35,7 @@ export default function CheckoutPage() {
     if(response.status !== 200){
       return;
   }
+  navigate  ('/order-success');
   }
 
   return (
