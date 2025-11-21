@@ -97,8 +97,17 @@
     "Order Items": "Sipariş Öğeleri",
     "Product": "Ürün",
     "Qty": "Adet",
-    "Total Amount": "Toplam Tutar"
-    
+    "Oops! Page Not Found": "Oops! Sayfa Bulunamadı",
+    "The page you're looking for doesn't exist or has been moved to another location.": "Aradığınız sayfa mevcut değil veya başka bir konuma taşındı.",
+    "Try searching for what you need or go back to the homepage": "İhtiyacınız olanı aramayı deneyin veya ana sayfaya dönün",
+    "Go to Homepage": "Ana Sayfaya Git",
+    "Go Back": "Geri Dön",
+    "Shop": "Alışveriş Yap",
+    "Cart": "Sepet",
+    "Orders": "Siparişler",
+    "Account": "Hesap",
+    "Need help?": "Yardıma mı ihtiyacınız var?"
+
 
 
 
