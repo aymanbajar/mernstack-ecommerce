@@ -65,6 +65,7 @@ export const CartProvider: FC<PropsWithChildren> = ({ children }) => {
 
       if (!cart) {
         setError("Failed to parse cart data");
+        console.log(error)
       }
       const cartItemsMapped = cart.items.map(
         ({ product, quantity }: { product: any; quantity: number }) => ({
@@ -79,6 +80,8 @@ export const CartProvider: FC<PropsWithChildren> = ({ children }) => {
       setCartItems(cartItemsMapped);
       setTotalAmount(cart.totalAmount);
     } catch (err) {
+        setError("Failed to add item to cart");
+
       console.error("Failed to add item to cart:", err);
     }
   };
