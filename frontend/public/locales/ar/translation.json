@@ -96,7 +96,19 @@
     "Order Items": "عناصر الطلب",
     "Product": "المنتج",
     "Qty": "الكمية",
-    "Total Amount": "المبلغ الإجمالي"
+    "Total Amount": "المبلغ الإجمالي",
+    "Oops! Page Not Found": "! عذرًا! الصفحة غير موجودة",
+    "The page you're looking for doesn't exist or has been moved to another location.": ". الصفحة التي تبحث عنها غير موجودة أو تم نقلها إلى موقع آخر",
+    "Try searching for what you need or go back to the homepage": ". حاول البحث عما تحتاجه أو العودة إلى الصفحة الرئيسية",
+    "Go to Homepage": "الذهاب إلى الصفحة الرئيسية",
+    "Go Back": "العودة للخلف",
+    "Shop": "تسوق",
+    "Cart": "عربة التسوق",
+    "Orders": "الطلبات",
+    "Account": "الحساب",
+    "Need help?": "هل تحتاج إلى مساعدة؟"
+
+
     
 
 
