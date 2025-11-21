@@ -13,6 +13,7 @@ import { CartProvider } from "./contexts/Cart/CartProvider";
 import CheckoutPage from "./pages/CheckoutPage";
 import MyOrderPage from "./pages/MyOrderPage";
 import OrderSuccessPage from "./pages/OrderSuccessPage";
+import PageNotFound from "./pages/PageNotFound";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
                 <Route path="/order-success" element={<OrderSuccessPage />} />
               </Route>
             </Routes>
+            <Route path="*" element={<PageNotFound />} />
             {/* footer */}
             <Footer />
           </BrowserRouter>
