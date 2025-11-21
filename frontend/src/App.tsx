@@ -13,7 +13,6 @@ import { CartProvider } from "./contexts/Cart/CartProvider";
 import CheckoutPage from "./pages/CheckoutPage";
 import MyOrderPage from "./pages/MyOrderPage";
 import OrderSuccessPage from "./pages/OrderSuccessPage";
-
 import PageNotFound from "./pages/PageNotFound";
 
 function App() {
