@@ -44,7 +44,7 @@ export default function ProductCart({ _id, title, image, price }: Props) {
         {/* Add to Cart Button */}
         <button 
           className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold py-3 px-6 rounded-xl shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 group/btn"
-          onClick={() => addItemToCart(_id)}
+          onClick={() => _id && addItemToCart(_id)}
         >
           <svg 
             className="w-5 h-5 group-hover/btn:animate-bounce" 
