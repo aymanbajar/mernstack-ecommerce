@@ -13,7 +13,7 @@ import { CartProvider } from "./contexts/Cart/CartProvider";
 import CheckoutPage from "./pages/CheckoutPage";
 import MyOrderPage from "./pages/MyOrderPage";
 import OrderSuccessPage from "./pages/OrderSuccessPage";
-import PageNotFound from "./pages/PageNotFound";
+import PageNotFound from './pages/PageNotFound';
 
 function App() {
   return (
@@ -39,8 +39,9 @@ function App() {
                 <Route path="/checkout" element={<CheckoutPage />} />
                 <Route path="/order-success" element={<OrderSuccessPage />} />
               </Route>
+              <Route path="*" element={<PageNotFound />} />
+
             </Routes>
-            <Route path="*" element={<PageNotFound />} />
             {/* footer */}
             <Footer />
           </BrowserRouter>
