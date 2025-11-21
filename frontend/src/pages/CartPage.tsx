@@ -4,7 +4,7 @@ import { FaTrash, FaShoppingCart, FaMinus, FaPlus } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 export default function CartPage() {
-  const { cartItems, totalAmount, updateItemInCart,deleteItemInCart , clearCart} = useCart();
+  const { cartItems, updateItemInCart,deleteItemInCart , clearCart} = useCart();
   const { t } = useTranslation();
   const handleQuantity = (productId: string, quantity: number) => {
     if (quantity <= 0) return;

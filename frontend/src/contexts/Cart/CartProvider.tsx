@@ -10,6 +10,7 @@ export const CartProvider: FC<PropsWithChildren> = ({ children }) => {
   const { token } = useAuth();
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [totalAmount, setTotalAmount] = useState<number>(0);
+   
   const [error, setError] = useState<string | null>(null);
   //fetch items in cart
   const fetchCart = async () => {
