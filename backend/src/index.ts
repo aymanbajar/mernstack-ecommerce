@@ -1,10 +1,10 @@
 import dotenv from "dotenv";
 import express from "express";
 import mongoose from "mongoose";
-import userRoute from "./routes/userRoute";
-import productRoute from "./routes/productRoute";
-import cartRoute from "./routes/cartRoute";
-import { seedInitailProducts } from "./services/productService";
+import userRoute from "./routes/userRoute.ts";
+import productRoute from "./routes/productRoute.ts";
+import cartRoute from "./routes/cartRoute.ts";
+import { seedInitailProducts } from "./services/productService.ts";
 import cors from "cors";
 dotenv.config(); // load environment variables from .env file
 const app = express(); // initialize express app

@@ -1,5 +1,5 @@
 
-import { productModel } from "../models/productModel";
+import { productModel } from "../models/productModel.ts";
 
 // get all  products
 

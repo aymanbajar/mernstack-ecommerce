@@ -1,12 +1,12 @@
 import express from 'express';
-import {getActiveCartForUser} from '../services/cartService';
-import { validateJWT } from '../middlewares/validateJWT';
-import {type ExtendRequest} from '../types/ExtendRequest';
-import { addItemToCart } from '../services/cartService';
-import { updateItemInCart } from '../services/cartService';  
-import { deleteItemInCart } from '../services/cartService';
-import { clearCart } from '../services/cartService';
-import {checkout} from '../services/cartService';
+import {getActiveCartForUser} from '../services/cartService.ts';
+import { validateJWT } from '../middlewares/validateJWT.ts';
+import {type ExtendRequest} from '../types/ExtendRequest.ts';
+import { addItemToCart } from '../services/cartService.ts';
+import { updateItemInCart } from '../services/cartService.ts';  
+import { deleteItemInCart } from '../services/cartService.ts';
+import { clearCart } from '../services/cartService.ts';
+import {checkout} from '../services/cartService.ts';
 
 // create  router for cart
 const router = express.Router();

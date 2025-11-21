@@ -1,7 +1,7 @@
-import { userModel } from "../models/userModel";
+import { userModel } from "../models/userModel.ts";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { orderModel } from "../models/orderModel";
+import { orderModel } from "../models/orderModel.ts";
 // register parameters interface
 interface RegisterParams{
     firstName:string;

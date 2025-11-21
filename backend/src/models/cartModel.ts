@@ -1,5 +1,5 @@
 import mongoose, { Schema, Document, type ObjectId } from "mongoose";
-import { type IProduct } from "./productModel";
+import { type IProduct } from "./productModel.ts";
 
 const CartStatusEnum = ["active" , "completed"]
 

@@ -1,8 +1,8 @@
-import { cartModel } from "../models/cartModel";
-import { type ICartItem } from "../models/cartModel";
-import type { IOrderItems } from "../models/orderModel";
-import { productModel } from "../models/productModel";
-import { orderModel } from "../models/orderModel";
+import { cartModel } from "../models/cartModel.ts";
+import { type ICartItem } from "../models/cartModel.ts";
+import type { IOrderItems } from "../models/orderModel.ts";
+import { productModel } from "../models/productModel.ts";
+import { orderModel } from "../models/orderModel.ts";
 // define interface for create  cart for user
 
 interface CreateCartForUser {

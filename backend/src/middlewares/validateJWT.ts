@@ -1,7 +1,7 @@
 import {  type Response , type NextFunction } from "express";
 import jwt from "jsonwebtoken";
-import {type  ExtendRequest } from "../types/ExtendRequest";
-import { userModel } from "../models/userModel";
+import {type  ExtendRequest } from "../types/ExtendRequest.ts";
+import { userModel } from "../models/userModel.ts";
 
 
 
