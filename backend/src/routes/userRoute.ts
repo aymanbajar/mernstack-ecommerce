@@ -1,8 +1,8 @@
 import express from "express";
-import { login, register } from "../services/userService.ts";
-import { validateJWT } from "../middlewares/validateJWT.ts";
-import type { ExtendRequest } from "../types/ExtendRequest.ts";
-import { getMyOrders } from "../services/userService.ts";
+import { login, register } from "../services/userService";
+import { validateJWT } from "../middlewares/validateJWT";
+import type { ExtendRequest } from "../types/ExtendRequest";
+import { getMyOrders } from "../services/userService";
 
 // Create a router instance
 const router = express.Router();
