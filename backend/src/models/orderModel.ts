@@ -14,6 +14,9 @@ export  interface IOrder extends Document {
     total: number;
     address: string;
     userId: ObjectId | string;
+    status: string;
+    createdAt?: Date;
+    updatedAt?: Date;
 }
 
 //create schema for order items
@@ -29,8 +32,9 @@ const orderSchema  =  new Schema<IOrder>({
     orderItems : [orderItemsSchema],
     total: {type: Number, required: true},
     address: {type: String, required: true},
-    userId:{type: Schema.Types.ObjectId, ref: 'User', required: true}
-})    ;
+    userId:{type: Schema.Types.ObjectId, ref: 'User', required: true},
+    status: {type: String, enum: ['Pending', 'Shipped', 'Delivered'], default: 'Pending'}
+}, { timestamps: true });
 
 //create order model
 export const orderModel = mongoose.model<IOrder>('Order', orderSchema);

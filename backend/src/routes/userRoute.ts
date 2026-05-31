@@ -53,4 +53,40 @@ router.get("/my-orders",validateJWT,async(req:ExtendRequest,res) => {
   }
 })
 
+// get wishlist
+router.get("/wishlist", validateJWT, async(req:ExtendRequest, res) => {
+  try {
+    const userId = req.user._id;
+    const { userModel } = await import("../models/userModel.ts");
+    const user = await userModel.findById(userId).populate('wishlist');
+    res.status(200).send(user?.wishlist || []);
+  } catch(err) {
+    res.status(500).send("Error fetching wishlist");
+  }
+});
+
+// toggle wishlist item
+router.post("/wishlist/toggle", validateJWT, async(req:ExtendRequest, res) => {
+  try {
+    const userId = req.user._id;
+    const { productId } = req.body;
+    const { userModel } = await import("../models/userModel.ts");
+    
+    const user = await userModel.findById(userId);
+    if (!user) return res.status(404).send("User not found");
+
+    const index = user.wishlist.findIndex(id => id.toString() === productId);
+    if (index === -1) {
+      user.wishlist.push(productId);
+    } else {
+      user.wishlist.splice(index, 1);
+    }
+    await user.save();
+    
+    res.status(200).send({ message: "Wishlist updated", wishlist: user.wishlist });
+  } catch(err) {
+    res.status(500).send("Error updating wishlist");
+  }
+});
+
 export default router;

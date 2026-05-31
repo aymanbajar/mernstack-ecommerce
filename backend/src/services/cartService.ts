@@ -3,6 +3,8 @@ import { type ICartItem } from "../models/cartModel.ts";
 import type { IOrderItems } from "../models/orderModel.ts";
 import { productModel } from "../models/productModel.ts";
 import { orderModel } from "../models/orderModel.ts";
+import { userModel } from "../models/userModel.ts";
+import { couponModel } from "../models/couponModel.ts";
 // define interface for create  cart for user
 
 interface CreateCartForUser {
@@ -179,53 +181,78 @@ export const clearCart = async({userId}:ClearCart) =>{
 interface checkOutParams {
   userId:string;
   address:string;
+  couponCode?:string;
 }
 
-export const checkout   = async({userId,address}:checkOutParams) => {
-  //check if address is provided
-  if(!address){
-    return {data:"Address is required for checkout",statusCode:400};
-  }
-  //get active cart for user
-  const cart = await getActiveCartForUser({userId});
- //define order items array
- const orderItems:IOrderItems[] = [];
+export const checkout = async ({ userId, address, couponCode }: { userId: string; address: string; couponCode?: string }) => {
+  try {
+    const cart = await cartModel.findOne({ userId }).populate<{ items: { product: any; quantity: number; unitPrice: number }[] }>("items.product");
 
- //items in cart 
- for(const item of cart.items){
-  //get product 
-  const product =  await productModel.findById(item.product);
-  if(!product){
-    return {data :"Product not found",statusCode:404};
-   }
-   const orderItem:IOrderItems ={
-    productTitle:product.title,
-    productImage:product.image,
-    unitPrice:item.unitPrice,
-    quantity:item.quantity
-   }
-   //push order item to order items array
-   orderItems.push(orderItem);
-   }
-   //assign items properties to order model
-   const order = await orderModel.create({
-    userId,
-    address,
-    orderItems,
-    total:cart.totalAmount
-   });
-   //save order to database
+    if (!cart || cart.items.length === 0) {
+      return { data: "Cart is empty", statusCode: 400 };
+    }
+
+    let discountPercentage = 0;
+    if (couponCode) {
+      const coupon = await couponModel.findOne({ code: couponCode, isActive: true });
+      if (coupon && coupon.expiryDate > new Date()) {
+        discountPercentage = coupon.discountPercentage;
+      }
+    }
+
+    const orderItems = [];
+    let total = 0;
+
+    for (const item of cart.items) {
+      const product = await productModel.findById(item.product._id);
+      if (!product) {
+        return { data: `Product ${item.product._id} not found`, statusCode: 400 };
+      }
+
+      if (product.stock < item.quantity) {
+        return { data: `Insufficient stock for ${product.title}`, statusCode: 400 };
+      }
+
+      orderItems.push({
+        productTitle: product.title,
+        productImage: product.image,
+        quantity: item.quantity,
+        unitPrice: item.unitPrice,
+      });
+
+      total += item.quantity * item.unitPrice;
+      
+      // Reduce stock
+      product.stock -= item.quantity;
+      await product.save();
+    }
+
+    // Apply discount
+    const discountAmount = (total * discountPercentage) / 100;
+    total -= discountAmount;
+
+    const order = new orderModel({
+      userId,
+      orderItems,
+      total,
+      address,
+    });
+
     await order.save();
-    //update cart status to completed
+    
+    // clear cart status
     cart.status = "completed";
-    //save cart to database
     await cart.save();
-    //return success message
-    return {data:order,statusCode:200};
 
- }
+    // Send email
+    const user = await userModel.findById(userId);
+    if (user && user.email) {
+      const { sendOrderConfirmationEmail } = await import("./emailService.ts");
+      sendOrderConfirmationEmail(user.email, order._id.toString(), total);
+    }
 
-
-
-
-
+    return { data: order, statusCode: 201 };
+  } catch (err) {
+    return { data: "something went wrong!", statusCode: 500 };
+  }
+};

@@ -2,30 +2,39 @@ import { userModel } from "../models/userModel.ts";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { orderModel } from "../models/orderModel.ts";
-// register parameters interface
-interface RegisterParams{
-    firstName:string;
-    lastName:string;
-    email:string;
-    password:string;
-}
+import { sendWelcomeEmail } from "./emailService.ts";
 
 //register function
-export const register  =async ({firstName,lastName,email,password}: RegisterParams) => {
-    //check  if user have an account
-    const  findUser =  await userModel.findOne({email});
-    if(findUser){
-        return  { data : "User already exists",statusCode : 400 }
-    }
-    //bcrypt  password
-    const bcryptedPassword =  await bcrypt.hash(password,10);
-    // create new user
-    const newUser = new userModel({firstName,lastName,email,password:bcryptedPassword});
-    // save user to database
+export const register = async ({
+  firstName,
+  lastName,
+  email,
+  password,
+}: any) => {
+  try {
+    const userExist = await userModel.findOne({ email });
+
+    if (userExist) return { data: "user is already exist !", statusCode: 400 };
+
+    const hashPassword = await bcrypt.hash(password, 10);
+
+    const newUser = new userModel({
+      firstName,
+      lastName,
+      email,
+      password: hashPassword,
+    });
+
     await newUser.save();
-    // return new user
-    return { data : generateJWT({firstName,lastName,email   }),statusCode : 200};
-}   
+    
+    // Send welcome email asynchronously
+    sendWelcomeEmail(email, firstName);
+
+    return { data : generateJWT({firstName,lastName,email, role: newUser.role }),statusCode : 200};
+  } catch (err) {
+    return { data: "something went wrong", statusCode: 500 };
+  }
+};
 
 //interface login params
 interface LoginParams {
@@ -50,7 +59,7 @@ export const  login = async ({email,password}:LoginParams) => {
         return {data : "Incorrect email  or password",statusCode : 400}
     }
     // return user
-    return {data : generateJWT({firstName:findUser.firstName, lastName:findUser.lastName, email}),statusCode : 200};
+    return {data : generateJWT({firstName:findUser.firstName, lastName:findUser.lastName, email, role: findUser.role}),statusCode : 200};
 }
 
 //interface for get orders parameters
@@ -70,6 +79,15 @@ export const getMyOrders = async({userId}: GetOrdersParams) => {
 
 }
 
+// get all users function (Admin only)
+export const getAllUsers = async () => {
+    try {
+        const users = await userModel.find({}, '-password'); // Exclude password
+        return { data: users, statusCode: 200 };
+    } catch(err) {
+        throw new Error("Unable to get users");
+    }
+}
 
 // generate jwt token 
 const generateJWT = (data :any) => {

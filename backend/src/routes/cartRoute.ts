@@ -87,10 +87,10 @@ router.post('/checkout',validateJWT, async (req:ExtendRequest,res)=>{
   try{
       //get user id from jwt
     const userId = req.user?._id;
-    //get addres from body
-    const {address} = req.body;
+    //get addres and coupon from body
+    const {address, couponCode} = req.body;
     //call checkout
-    const {data ,statusCode} = await checkout({userId,address});
+    const {data ,statusCode} = await checkout({userId,address, couponCode});
     //send response
     res.status(statusCode).send({data});
   }catch(err){

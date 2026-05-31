@@ -1,10 +1,58 @@
 
 import { productModel } from "../models/productModel.ts";
 
-// get all  products
+// get all products
+export const getAllProducts = async (query: any = {}) => {
+    return await productModel.find(query).sort({ createdAt: -1 });
+}
 
- export const getAllProducts  = async () => {
-    return await productModel.find();
+// get single product
+export const getProductById = async (id: string) => {
+    return await productModel.findById(id).populate('reviews.userId', 'firstName lastName');
+}
+
+// add a review
+export const addReview = async (productId: string, userId: any, rating: number, comment: string) => {
+    const product = await productModel.findById(productId);
+    if (!product) throw new Error("Product not found");
+
+    // Check if user already reviewed
+    const alreadyReviewed = product.reviews.find(r => r.userId.toString() === userId.toString());
+    if (alreadyReviewed) {
+        throw new Error("You have already reviewed this product");
+    }
+
+    const review = {
+        userId,
+        rating: Number(rating),
+        comment,
+        createdAt: new Date()
+    };
+
+    product.reviews.push(review);
+    
+    // Update average rating
+    product.averageRating = product.reviews.reduce((acc, item) => item.rating + acc, 0) / product.reviews.length;
+    
+    await product.save();
+    return product;
+}
+
+// create a new product
+export const createProduct = async (productData: any) => {
+    const newProduct = new productModel(productData);
+    await newProduct.save();
+    return newProduct;
+}
+
+// update a product
+export const updateProduct = async (id: string, productData: any) => {
+    return await productModel.findByIdAndUpdate(id, productData, { new: true });
+}
+
+// delete a product
+export const deleteProduct = async (id: string) => {
+    return await productModel.findByIdAndDelete(id);
 }
 
 // insert products 
