@@ -5,19 +5,22 @@ import { useTranslation } from "react-i18next";
 import { useAuth } from "../contexts/Auth/AuthContext";
 // Icons
 import { IoCart, IoPerson, IoSettings } from "react-icons/io5";
-import { FaBoxOpen } from "react-icons/fa";
+import { FaBoxOpen, FaHeart, FaShoppingCart } from "react-icons/fa";
 import { BiLogOut } from "react-icons/bi";
-import { FaShoppingCart } from "react-icons/fa";
 import { MdAccountCircle } from "react-icons/md";
 import { useCart } from "../contexts/Cart/CartContext";
+import { useTheme } from "../contexts/Theme/ThemeContext";
+import { FaSun, FaMoon } from "react-icons/fa";
+
 export default function Navbar() {
   const navigate = useNavigate(); //navigate hook from react-router
   //states
   const [displayMenu, setDisplayMenu] = useState(false);
   const [selectedLang, setSelectedLang] = useState("en");
   const { t, i18n } = useTranslation();
-  const { username, isAuthenticated, logout } = useAuth();
+  const { username, isAuthenticated, logout, role } = useAuth();
   const { cartItems } = useCart();
+  const { theme, toggleTheme } = useTheme();
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const lang = e.target.value;
@@ -70,6 +73,14 @@ export default function Navbar() {
               </option>
             </select>
 
+            {/* Theme Toggle */}
+            <button
+              onClick={toggleTheme}
+              className="flex items-center justify-center w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm hover:bg-white/30 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white/50 text-white"
+            >
+              {theme === "dark" ? <FaSun className="text-xl" /> : <FaMoon className="text-xl" />}
+            </button>
+
             {isAuthenticated ? (
               <div className="relative">
                 <button
@@ -100,6 +111,17 @@ export default function Navbar() {
 
                     <button
                       onClick={() => {
+                        navigate(role === "admin" ? "/admin/dashboard" : "/dashboard");
+                        setDisplayMenu(false);
+                      }}
+                      className="w-full text-left px-4 py-3 hover:bg-blue-50 text-gray-700 transition-colors duration-200 flex items-center gap-3 group"
+                    >
+                      <IoSettings className="text-blue-500 group-hover:scale-110 transition-transform duration-200" />
+                      <span className="font-medium">{role === "admin" ? t("Admin Dashboard") : t("My Dashboard")}</span>
+                    </button>
+
+                    <button
+                      onClick={() => {
                         navigate("/settings");
                         setDisplayMenu(false);
                       }}
@@ -118,6 +140,17 @@ export default function Navbar() {
                     >
                       <FaBoxOpen className="text-blue-500 group-hover:scale-110 transition-transform duration-200" />
                       <span className="font-medium">{t("My Orders")}</span>
+                    </button>
+
+                    <button
+                      onClick={() => {
+                        navigate("/wishlist");
+                        setDisplayMenu(false);
+                      }}
+                      className="w-full text-left px-4 py-3 hover:bg-pink-50 text-gray-700 transition-colors duration-200 flex items-center gap-3 group"
+                    >
+                      <FaHeart className="text-pink-500 group-hover:scale-110 transition-transform duration-200" />
+                      <span className="font-medium">{t("My Wishlist")}</span>
                     </button>
 
                     <button

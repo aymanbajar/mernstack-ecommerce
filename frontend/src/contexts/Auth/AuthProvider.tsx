@@ -10,10 +10,23 @@ const TOKEN_KEY = "token";
     const [token, setToken] = useState<string | null>(localStorage.getItem (TOKEN_KEY));
     const [myOrders, setMyOrders] = useState([]);  
 
+    // Parse role from token if it exists
+    const getRoleFromToken = (jwtToken: string | null) => {
+        if (!jwtToken) return null;
+        try {
+            const payload = JSON.parse(atob(jwtToken.split('.')[1]));
+            return payload.role || 'user';
+        } catch {
+            return null;
+        }
+    };
+
+    const [role, setRole] = useState<string | null>(getRoleFromToken(localStorage.getItem(TOKEN_KEY)));
 
     const login = (username:string, token:string) => {
         setUsername (username);
         setToken (token);
+        setRole(getRoleFromToken(token));
         localStorage.setItem (USERNAME_KEY, username);
         localStorage.setItem (TOKEN_KEY, token);
     }
@@ -22,6 +35,7 @@ const TOKEN_KEY = "token";
     const logout =() => {
         setUsername (null);
         setToken (null);
+        setRole(null);
         localStorage.removeItem (USERNAME_KEY);
         localStorage.removeItem (TOKEN_KEY);
     }
@@ -40,7 +54,7 @@ const TOKEN_KEY = "token";
     }
 
     return (
-        <AuthContext.Provider value ={{ username, token, myOrders, isAuthenticated,login, logout, getMyOrders }}>
+        <AuthContext.Provider value ={{ username, token, role, myOrders, isAuthenticated,login, logout, getMyOrders }}>
             {children}
         </AuthContext.Provider>
     )

@@ -1,4 +1,9 @@
 @import "tailwindcss";
+@custom-variant dark (&:is(.dark *));
+
+body {
+  font-family: 'Inter', sans-serif;
+}
 
 /* Navbar Animation */
 @keyframes fade-in-down {

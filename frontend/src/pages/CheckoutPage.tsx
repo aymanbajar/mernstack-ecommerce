@@ -20,23 +20,42 @@ export default function CheckoutPage() {
   const {token} = useAuth();
   const navigate = useNavigate();
   
+  const [couponCode, setCouponCode] = useState("");
+  const [discount, setDiscount] = useState(0);
+  const [couponMessage, setCouponMessage] = useState("");
+  
   const handleConfirmOrder = async () => {
     if (!address)  return;
     const response =  await axios.post(`${BASE_URL}/cart/checkout`,
-      {address
-      },{
+      { address, couponCode },
+      {
          headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
       },
       }
-
     )
     if(response.status !== 200){
       return;
+    }
+    navigate('/order-success');
   }
-  navigate  ('/order-success');
-  }
+
+  const handleApplyCoupon = async () => {
+    if (!couponCode) return;
+    try {
+      const res = await axios.post(`${BASE_URL}/coupon/apply`, { code: couponCode }, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      setDiscount(res.data.discountPercentage);
+      setCouponMessage(t("Coupon applied successfully!"));
+    } catch (err: any) {
+      setDiscount(0);
+      setCouponMessage(err.response?.data || t("Invalid coupon"));
+    }
+  };
+
+  const finalTotal = totalAmount - (totalAmount * (discount / 100));
 
   return (
     <div className="min-h-screen bg-linear-to-br from-gray-50 via-white to-purple-50 py-12 px-4">
@@ -88,6 +107,16 @@ export default function CheckoutPage() {
                 ))}
               </div>
 
+              {/* Coupon Code Section */}
+              <div className="py-4 border-t-2 border-gray-200">
+                <label className="block text-sm font-semibold text-gray-700 mb-2">{t("Promo Code")}</label>
+                <div className="flex gap-2">
+                  <input type="text" value={couponCode} onChange={(e) => setCouponCode(e.target.value.toUpperCase())} className="flex-1 px-4 py-2 rounded-xl border border-gray-200 focus:outline-none focus:border-purple-500 uppercase text-sm" placeholder={t("Enter code")} />
+                  <button onClick={handleApplyCoupon} className="bg-gray-900 text-white px-4 py-2 rounded-xl text-sm font-bold hover:bg-gray-800 transition-colors">{t("Apply")}</button>
+                </div>
+                {couponMessage && <p className={`mt-2 text-xs font-bold ${discount > 0 ? 'text-green-600' : 'text-red-600'}`}>{couponMessage}</p>}
+              </div>
+
               {/* Price Breakdown */}
               <div className="space-y-3 pt-4 border-t-2 border-gray-200">
                 <div className="flex justify-between text-gray-600">
@@ -95,6 +124,18 @@ export default function CheckoutPage() {
                   <span className="font-semibold">
                     ${totalAmount.toFixed(2)}
                   </span>
+                </div>
+                {discount > 0 && (
+                  <div className="flex justify-between text-green-600">
+                    <span>{t("Discount")} ({discount}%)</span>
+                    <span className="font-semibold">
+                      -${(totalAmount * (discount / 100)).toFixed(2)}
+                    </span>
+                  </div>
+                )}
+                <div className="flex justify-between text-gray-900 text-xl font-bold mt-2 pt-2 border-t border-gray-100">
+                  <span>{t("Total")}</span>
+                  <span>${finalTotal.toFixed(2)}</span>
                 </div>
               </div>
 
